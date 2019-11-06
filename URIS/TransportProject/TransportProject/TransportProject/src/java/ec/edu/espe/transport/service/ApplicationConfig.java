@@ -34,6 +34,8 @@ public class ApplicationConfig extends Application {
         resources.add(ec.edu.espe.transport.service.ProductIvaResource.class);
         resources.add(ec.edu.espe.transport.service.ProductResource.class);
         resources.add(ec.edu.espe.transport.service.StringResource.class);
+        resources.add(ec.edu.espe.transport.service.UpdateIVAResource.class);
+        resources.add(ec.edu.espe.transport.service.ZoneResource.class);
     }
     
 }

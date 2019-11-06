@@ -7,6 +7,7 @@ package ec.edu.espe.transport.control;
 
 import ec.edu.espe.transport.model.Carrier;
 import ec.edu.espe.transport.model.Product;
+import ec.edu.espe.transport.model.Zone;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -115,6 +116,42 @@ public class SearchData {
 
     }
 
+    public static void changeIVA(String newIVA) {
+        // Conexion a la base
+        BaseConnection conexion = new BaseConnection();
+        Connection cn = conexion.getConexion();
+        //Sacar datos
+        String sql = "update producto set valorunit = valorunit + valorunit*?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, newIVA);
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+    
+    public static void deleteZONE(String codeZone) {
+        // Conexion a la base
+        BaseConnection conexion = new BaseConnection();
+        Connection cn = conexion.getConexion();
+        //Sacar datos
+        String sql = "DELETE FROM zona WHERE codigozona = ?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, codeZone);
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
     public static Carrier searchCarrierByCode(String carrierCode) {
         Carrier carrier = new Carrier();
         //carrier.setCarrierEmail("0");
@@ -177,6 +214,60 @@ public class SearchData {
         }
 
         return arrayProduct;
+
+    }
+
+    public static ArrayList<Product> searchAllProduct() {
+        BaseConnection conexion = new BaseConnection();
+        Connection cn = conexion.getConexion();
+        Product product = new Product();
+        ArrayList<Product> arrayProduct = new ArrayList<Product>();
+        //Sacar datos
+        String sql = "SELECT * FROM producto";
+        Statement st;
+
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                product = new Product(rs.getString(1), rs.getString(2), rs.getString(3), Float.parseFloat(rs.getString(4)), rs.getString(5), rs.getString(6));
+
+                arrayProduct.add(product);
+
+            }
+
+        } catch (SQLException ex) {
+
+        }
+
+        return arrayProduct;
+
+    }
+    
+    public static ArrayList<Zone> searchAllZone() {
+        BaseConnection conexion = new BaseConnection();
+        Connection cn = conexion.getConexion();
+        Zone zone = new Zone();
+        ArrayList<Zone> arrayZone = new ArrayList<Zone>();
+        //Sacar datos
+        String sql = "SELECT * FROM zona";
+        Statement st;
+
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                zone = new Zone(rs.getString(1), rs.getString(2));
+
+                arrayZone.add(zone);
+
+            }
+
+        } catch (SQLException ex) {
+
+        }
+
+        return arrayZone;
 
     }
 
