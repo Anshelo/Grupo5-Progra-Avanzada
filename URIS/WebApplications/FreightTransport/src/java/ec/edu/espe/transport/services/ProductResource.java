@@ -7,8 +7,10 @@ package ec.edu.espe.transport.services;
 
 import ec.edu.espe.transport.model.DBConnect;
 import ec.edu.espe.transport.model.Product;
+import ec.edu.espe.transport.model.ProductDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -17,6 +19,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -24,7 +27,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author DenniseSandoval
  */
-@Path("getproductprice")
+@Path("product")
 public class ProductResource {
 
     @Context
@@ -61,5 +64,35 @@ public class ProductResource {
         Product product = new Product(objProduct.getProductCode(), objProduct.getProductName(), objProduct.getDescription(), 
                 objProduct.getWeight(), objProduct.getSensibility(), valueProduct);
         return product;
+    }
+    @GET
+    @Path("{weight}")    
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Product> getJsonProductoPeso(@PathParam("weight") float peso) {
+        ProductDAO prod=new ProductDAO();
+        ArrayList<Product> producto=new ArrayList<Product>();
+        producto=prod.mostrarProducto(peso);
+        return producto;
+    }
+    
+    
+    @PUT
+    @Path("/modifify/product")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ArrayList<Product> modifyProduct(Product data) {
+        ProductDAO response = new ProductDAO();
+        response.modificarProductoIdentificacion(data);
+  /*      System.out.println(data.getCodigo());
+        System.out.println(data.getNombre());
+        System.out.println(data.getDescripcion());
+        System.out.println(data.getPeso());
+        System.out.println(data.getSensibilidad());
+        System.out.println(data.getValorU());
+*/        ProductDAO prod=new ProductDAO();
+        
+        ArrayList<Product> producto=new ArrayList<Product>();
+        producto=prod.mostrarProductoCodigo(data.getProductCode());
+        return producto;
+
     }
 }
