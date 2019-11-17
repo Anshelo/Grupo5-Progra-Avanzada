@@ -18,6 +18,7 @@ public class Guide {
     private String customerId;
     private String carrierCard;
     private String zoneCode;
+    private String productCode;
     /*
     {
     "guideId":"05",
@@ -27,14 +28,15 @@ public class Guide {
     "total":34.50,
     "customerId":"1714298823",
     "carrierCard":"1726415672",
-    "zoneCode":"1"
+    "zoneCode":"1",
+    "productCode":"05"
     }
     */
 
     public Guide() {
     }
-
-    public Guide(String guideId, String sendDate, String deliverDate, int quantity, double total, String customerId, String carrierCard, String zoneCode) {
+    
+    public Guide(String guideId, String sendDate, String deliverDate, int quantity, double total, String customerId, String carrierCard, String zoneCode, String productCode) {
         this.guideId = guideId;
         this.sendDate = sendDate;
         this.deliverDate = deliverDate;
@@ -43,6 +45,7 @@ public class Guide {
         this.customerId = customerId;
         this.carrierCard = carrierCard;
         this.zoneCode = zoneCode;
+        this.productCode = productCode;
     }
 
     /**
@@ -156,4 +159,19 @@ public class Guide {
     public void setZoneCode(String zoneCode) {
         this.zoneCode = zoneCode;
     }
+
+    /**
+     * @return the productCode
+     */
+    public String getProductCode() {
+        return productCode;
+    }
+
+    /**
+     * @param productCode the productCode to set
+     */
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+    
 }

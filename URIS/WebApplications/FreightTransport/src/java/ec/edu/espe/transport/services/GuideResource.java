@@ -56,7 +56,7 @@ public class GuideResource {
         Guide tempGuide;
         ArrayList<Guide> guide = new ArrayList();
         while (rs.next()) {
-            tempGuide = new Guide(rs.getString("idguia"), rs.getString("fechaenvio"), rs.getString("fecha_entrega"), rs.getInt("cantidad"), rs.getDouble("total"), rs.getString("ci_cliente"), rs.getString("ci_transportista"), rs.getString("cod_zona"));
+            tempGuide = new Guide(rs.getString("idguia"), rs.getString("fechaenvio"), rs.getString("fecha_entrega"), rs.getInt("cantidad"), rs.getDouble("total"), rs.getString("ci_cliente"), rs.getString("ci_transportista"), rs.getString("cod_zona"), rs.getString("cod_producto"));
             guide.add(tempGuide);
         }
         return guide;
@@ -69,18 +69,19 @@ public class GuideResource {
         String query;
         PreparedStatement state;
         query = "INSERT INTO guia" + 
-                " (idguia,fechaenvio,fecha_entrega,cantidad,total,ci_cliente,ci_transportista,cod_zona) values (?,?,?,?,?,?,?,?)";
+                " (idguia,fechaenvio,fecha_entrega,cantidad,total,ci_cliente,ci_transportista,cod_zona,cod_producto) values (?,?,?,?,?,?,?,?,?)";
         state = connect.connect().prepareStatement(query);
         state.setString(1, objGuide.getGuideId());
         state.setString(2, objGuide.getSendDate());
         state.setString(3, objGuide.getDeliverDate());
         state.setInt(4, objGuide.getQuantity());
         state.setDouble(5, objGuide.getTotal());
-        state.setString(6, objGuide.getCustomerId());
-        state.setString(7, objGuide.getCarrierCard());
+        state.setString(6, objGuide.getCarrierCard());
+        state.setString(7, objGuide.getCustomerId());
         state.setString(8, objGuide.getZoneCode());
+        state.setString(9, objGuide.getProductCode());
         state.executeUpdate();
-        Guide guide=new Guide(objGuide.getGuideId(), objGuide.getSendDate(), objGuide.getDeliverDate(), objGuide.getQuantity(), objGuide.getTotal(), objGuide.getCustomerId(), objGuide.getCarrierCard(), objGuide.getZoneCode());
+        Guide guide=new Guide(objGuide.getGuideId(), objGuide.getSendDate(), objGuide.getDeliverDate(), objGuide.getQuantity(), objGuide.getTotal(), objGuide.getCustomerId(), objGuide.getCarrierCard(), objGuide.getZoneCode(), objGuide.getProductCode());
         return guide;
     }
     @PUT
