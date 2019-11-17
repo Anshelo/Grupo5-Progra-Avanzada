@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -77,7 +78,7 @@ public class ProductResource {
     
     
     @PUT
-    @Path("/modifify/product")
+    @Path("/modify/product")
     @Consumes(MediaType.APPLICATION_JSON)
     public ArrayList<Product> modifyProduct(Product data) {
         ProductDAO response = new ProductDAO();
@@ -94,5 +95,26 @@ public class ProductResource {
         producto=prod.mostrarProductoCodigo(data.getProductCode());
         return producto;
 
+    }
+    
+    @POST
+    @Path("/createProduct")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void save(Product data) {
+        ProductDAO response = new ProductDAO();
+        response.adicionarProduct(data);
+    //    response.adicionarGuia(data);
+      //  System.out.println(data.getCodigo());
+    //    System.out.println(data.getNombre());
+      //  System.out.println(data.getCiudad());
+    }    
+    
+     @Path("/deleteProduct/{code}")
+     @DELETE
+     @Produces(MediaType.APPLICATION_JSON)
+    public void remove(@PathParam("code") String code) {
+        ProductDAO prod=new ProductDAO();
+        prod.eliminarProductoIdentificacion(code);
+         //System.out.println(code);
     }
 }
