@@ -5,21 +5,21 @@
  */
 package ec.edu.espe.transport.services;
 
-import ec.edu.espe.transport.model.DBConnect;
+import ec.edu.espe.transport.model.Carrier;
 import ec.edu.espe.transport.model.Guide;
-import ec.edu.espe.transport.model.Product;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import ec.edu.espe.transport.model.GuideDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -47,43 +47,47 @@ public class GuideResource {
     @Path("/showallguides")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList showAllGuides() throws SQLException {
-        DBConnect connect = new DBConnect();
-        String query;
-        query = "SELECT * from guia";
-        PreparedStatement state = connect.connect().prepareStatement(query);
-        ResultSet rs = state.executeQuery();
-        Guide tempGuide;
-        ArrayList<Guide> guide = new ArrayList();
-        while (rs.next()) {
-            tempGuide = new Guide(rs.getString("idguia"), rs.getString("fechaenvio"), rs.getString("fecha_entrega"), rs.getInt("cantidad"), rs.getDouble("total"), rs.getString("ci_cliente"), rs.getString("ci_transportista"), rs.getString("cod_zona"), rs.getString("cod_producto"));
-            guide.add(tempGuide);
-        }
-        return guide;
+    public ArrayList<Guide> getGuide() throws SQLException {
+        GuideDAO guide = new GuideDAO();
+        ArrayList<Guide> objGuide=new ArrayList<Guide>();
+        objGuide = guide.showAllGuides();
+        return objGuide;
+    }
+    @Path("/showguidebyid/{idguide}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Guide getGuidebyId(@PathParam("idguide") String id) throws SQLException {
+        GuideDAO guide = new GuideDAO();
+        Guide objGuide= new Guide();
+        objGuide=guide.searchGuidebyId(id);
+        return objGuide;
+    }
+    @Path("/removeguide/{idguide}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ArrayList<Guide> deleteGuide(@PathParam("idguide") String id) throws SQLException{
+        GuideDAO guide =new GuideDAO();
+        guide.deleteGuide(id);
+        ArrayList<Guide> listGuide= new ArrayList<Guide>();
+        listGuide=guide.showAllGuides();
+        return listGuide;
+    }
+    @Path("/updateguide/{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Boolean updateGuide(Guide objGuide, @PathParam("id") String id) throws SQLException{
+        GuideDAO guide=new GuideDAO();
+        guide.updateGuide(objGuide,id);
+        //objGuide=guide.searchGuidebyId(id);
+        return true;
     }
     @Path("/insertguide")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Object addGuide(Guide objGuide) throws SQLException {
-        DBConnect connect = new DBConnect();
-        String query;
-        PreparedStatement state;
-        query = "INSERT INTO guia" + 
-                " (idguia,fechaenvio,fecha_entrega,cantidad,total,ci_cliente,ci_transportista,cod_zona,cod_producto) values (?,?,?,?,?,?,?,?,?)";
-        state = connect.connect().prepareStatement(query);
-        state.setString(1, objGuide.getGuideId());
-        state.setString(2, objGuide.getSendDate());
-        state.setString(3, objGuide.getDeliverDate());
-        state.setInt(4, objGuide.getQuantity());
-        state.setDouble(5, objGuide.getTotal());
-        state.setString(6, objGuide.getCarrierCard());
-        state.setString(7, objGuide.getCustomerId());
-        state.setString(8, objGuide.getZoneCode());
-        state.setString(9, objGuide.getProductCode());
-        state.executeUpdate();
-        Guide guide=new Guide(objGuide.getGuideId(), objGuide.getSendDate(), objGuide.getDeliverDate(), objGuide.getQuantity(), objGuide.getTotal(), objGuide.getCustomerId(), objGuide.getCarrierCard(), objGuide.getZoneCode(), objGuide.getProductCode());
-        return guide;
-    }
+    public Guide addGuide(Guide objGuide) throws SQLException{
+        GuideDAO guide = new GuideDAO();
+       return guide.addGuide(objGuide);
+    } 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(Guide content) {

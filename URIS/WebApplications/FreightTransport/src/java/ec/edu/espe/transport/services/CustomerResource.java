@@ -7,12 +7,14 @@ package ec.edu.espe.transport.services;
 
 import ec.edu.espe.transport.model.Customer;
 import ec.edu.espe.transport.model.DBConnect;
+import ec.edu.espe.transport.model.Guide;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
@@ -21,7 +23,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author DenniseSandoval
  */
-@Path("insertcustomeraftervalidatingid")
+@Path("customer")
 public class CustomerResource {
 
     @Context
@@ -80,10 +82,10 @@ public class CustomerResource {
         }
         return cedulaCorrecta;
     }
-    
+    @Path("/insertcustomer/aftervalidatingid")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Object ValidateIdCard(Customer objCustomer) throws SQLException {
+    public Customer ValidateIdCard(Customer objCustomer) throws SQLException {
         DBConnect connect = new DBConnect();
         boolean validatorIdCard = false;
         String query;
@@ -99,11 +101,13 @@ public class CustomerResource {
             state.setString(5, objCustomer.getTelephone());
             state.setString(6, objCustomer.getPhone());
             state.setString(7, objCustomer.getEmail());
-            state.executeUpdate();
-            //Customer customer=new Customer(objCustomer.getIdCard(), objCustomer.getRuc(), objCustomer.getName(), objCustomer.getAddress(), objCustomer.getTelephone(), objCustomer.getPhone(), objCustomer.getEmail());
-            return validatorIdCard;
-        }else{
-            return validatorIdCard;
-        }
+            state.executeUpdate();}
+            Customer customer=new Customer(objCustomer.getIdCard(), objCustomer.getRuc(), objCustomer.getName(), objCustomer.getAddress(), objCustomer.getTelephone(), objCustomer.getPhone(), objCustomer.getEmail());
+        
+        return customer;
+    }
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void putJson(Customer content) {
     }
 }
