@@ -31,11 +31,7 @@
                                             
                                             <td><input type="text" class="form-control" name="codcarrier" id="id" placeholder="1" onchange="validatenumbers()" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td colspan="3"></td>
-                                            <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Registrar
-                                                </button>
-                                            </td>
+                                           
                                         </div>
                                     </tr>
 									<tr>
@@ -44,12 +40,14 @@
                                                 <div class="label">Cédula: </div>
                                             </td>
                                             
-                                            <td><input type="text" class="form-control" name="cicarrier" id="id" placeholder="1714678823" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
-                                            <td colspan="3"></td>
+                                            <td><input type="text" class="form-control" name="cicarrier" id="id" placeholder="1714678823" onchange="
+                                                       if (!validarDocumento())
+                                                        alert('Cedula incorrecta');
+                                                    " onkeypress="return validatenumbers(event)" onpaste="return false"></td>
                                             <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Registrar
-                                                </button>
+                                            <td colspan="2"></td>
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Registrar">
                                             </td>
                                         </div>
                                     </tr>
@@ -65,9 +63,7 @@
                                                 <td>
                                                 </td>    
                                                 <td>
-                                                    <button class="btn btn-primary btn-block center">
-                                                    Eliminar
-                                                </button>
+                                                    <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Eliminar">
                                                 </td>
                                             </div>
                                         </tr>
@@ -83,9 +79,7 @@
                                             </td>
                                             <td> </td>
                                             <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Modificar
-                                                </button>
+                                                <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Modificar">
                                             </td>
                                         </div>
                                     </tr>
@@ -101,9 +95,7 @@
                                                 </td>
                                                 <td> </td>
                                                 <td>
-                                                    <button class="btn btn-primary btn-block center">
-                                                       Actualizar
-                                                    </button>
+                                                    <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Mostrar">
                                                 </td>
                                             </div>
                                     </tr>
