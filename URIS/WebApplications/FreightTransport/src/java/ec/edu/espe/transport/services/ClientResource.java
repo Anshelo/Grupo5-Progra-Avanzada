@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Santiago Vivas
  */
-@Path("Client")
+@Path("client")
 public class ClientResource {
 
     @Context
@@ -69,7 +69,13 @@ public class ClientResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Client insertClient(Client client) throws SQLException {
         ClientDAO newClient = new ClientDAO();
-        return newClient.addClient(client);
+        if(newClient.validadorDeCedula(client.getCiClient())){
+            return newClient.addClient(client);
+        }else{
+            return new Client();
+        }
+        
+        
     }
 
     @Path("searchClient/{ci}")
