@@ -5,14 +5,22 @@
  */
 package ec.edu.espe.transport.services;
 
+import ec.edu.espe.transport.model.Carrier;
+import ec.edu.espe.transport.model.CarrierDAO;
 import ec.edu.espe.transport.model.Client;
+import ec.edu.espe.transport.model.ClientDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -33,7 +41,9 @@ public class ClientResource {
     }
 
     /**
-     * Retrieves representation of an instance of ec.edu.espe.transport.services.ClientResource
+     * Retrieves representation of an instance of
+     * ec.edu.espe.transport.services.ClientResource
+     *
      * @return an instance of ec.edu.espe.transport.model.Client
      */
     @GET
@@ -45,10 +55,44 @@ public class ClientResource {
 
     /**
      * PUT method for updating or creating an instance of ClientResource
+     *
      * @param content representation for the resource
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(Client content) {
+    }
+
+    @Path("addClient")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Client insertClient(Client client) throws SQLException {
+        ClientDAO newClient = new ClientDAO();
+        return newClient.addClient(client);
+    }
+
+    @Path("searchClient/{ci}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Client getCarrierTruck(@PathParam("ci") String ci) {
+        ClientDAO searchedClient = new ClientDAO();
+        return searchedClient.searchClientByCi(ci);
+    }
+
+    @PUT
+    @Path("/updateclient/{ci}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateClient(Client data) {
+        ClientDAO updatedClient = new ClientDAO();
+        updatedClient.updateClient(data);
+    }
+
+    @DELETE
+    @Path("/deleteClient/{ci}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteClient(@PathParam("ci") String ci) {
+        ClientDAO deletedClient = new ClientDAO();
+        deletedClient.deleteClient(ci);
     }
 }
