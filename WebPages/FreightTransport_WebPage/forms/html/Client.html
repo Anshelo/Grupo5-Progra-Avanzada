@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/validations.js"></script>
 	<script src="../php/json.php"></script>
-    <title>Formulario Guia</title>
+    <title>Formulario Cliente</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                             <table class="table">
 
                                 <head>
-                                    <div class="tittle">
+                                    <div class="styletittle">
                                         Formulario de Registrar Cliente
                                     </div>
                                 </head>
@@ -29,7 +29,9 @@
                                                 <div class="label">Cédula: </div>
                                             </td>
                                             
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" 
+                                                        onchange="if (!validarDocumento())  cleanCI();"
+                                                        onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td colspan="3"></td>
                                             <td>
                                                 <button class="btn btn-primary btn-block center">

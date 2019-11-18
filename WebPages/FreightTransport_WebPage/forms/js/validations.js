@@ -235,3 +235,9 @@ function verificaPassword() {
 function tecla() {
     alert('TECLADO BLOQUEADO')
 }
+
+function cleanCI(){
+    numero = document.getElementById('id').value;
+    var activo = document.activeElement.id;
+    numero.innerHTML = "";
+}
