@@ -4,25 +4,29 @@
  * and open the template in the editor.
  */
 package ec.edu.espe.transport.model;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
  * @author DenniseSandoval
  */
 public class GuideDAO {
+
     DBConnect con;
 
     public GuideDAO() {
-        con=new DBConnect();
+        con = new DBConnect();
     }
-    public Guide addGuide(Guide objGuide)throws SQLException{
+
+    public Guide addGuide(Guide objGuide) throws SQLException {
         Connection acceso = con.connect();
-        String sql = "INSERT INTO guia" + 
-                " (idguia,fechaenvio,fecha_entrega,cantidad,total,ci_cliente,ci_transportista,cod_zona) values (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO guia"
+                + " (idguia,fechaenvio,fecha_entrega,cantidad,total,ci_cliente,ci_transportista,cod_zona) values (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement state = acceso.prepareStatement(sql);
             state.setString(1, objGuide.getGuideId());
@@ -37,9 +41,10 @@ public class GuideDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        Guide guide=new Guide(objGuide.getGuideId(), objGuide.getSendDate(), objGuide.getDeliverDate(), objGuide.getQuantity(), objGuide.getTotal(), objGuide.getCustomerId(), objGuide.getCarrierCard(), objGuide.getZoneCode());
+        Guide guide = new Guide(objGuide.getGuideId(), objGuide.getSendDate(), objGuide.getDeliverDate(), objGuide.getQuantity(), objGuide.getTotal(), objGuide.getCustomerId(), objGuide.getCarrierCard(), objGuide.getZoneCode());
         return guide;
     }
+
     public ArrayList<Guide> showAllGuides() throws SQLException {
         DBConnect connect = new DBConnect();
         String query;
@@ -54,38 +59,39 @@ public class GuideDAO {
         }
         return guide;
     }
+
     public Guide searchGuidebyId(String guideId) throws SQLException {
         DBConnect connect = new DBConnect();
         String query;
-        query = "SELECT * from guia WHERE idguia='"+guideId+"'";
+        query = "SELECT * from guia WHERE idguia='" + guideId + "'";
         PreparedStatement state = connect.connect().prepareStatement(query);
         ResultSet rs = state.executeQuery();
-        Guide guide=null;
+        Guide guide = null;
         while (rs.next()) {
             guide = new Guide(rs.getString("idguia"), rs.getString("fechaenvio"), rs.getString("fecha_entrega"), rs.getInt("cantidad"), rs.getDouble("total"), rs.getString("ci_cliente"), rs.getString("ci_transportista"), rs.getString("cod_zona"));
         }
         return guide;
     }
-   public void deleteGuide(String guideId) {
-       Connection acceso = con.connect();
-        String sql = "DELETE FROM guia WHERE idguia='"+guideId+"'";
+
+    public void deleteGuide(String guideId) {
+        Connection acceso = con.connect();
+        String sql = "DELETE FROM guia WHERE idguia='" + guideId + "'";
         try {
             PreparedStatement state = acceso.prepareStatement(sql);
             state.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-   }
-   public void updateGuide(Guide guide, String id){
-        Connection acceso = con.connect();
-        String sql = "UPDATE guia SET fechaenvio='"+guide.getSendDate()+"',"
-                    + "fecha_entrega='"+guide.getDeliverDate()+"',cantidad='"+guide.getQuantity()+"',total='"+guide.getTotal()+"',ci_cliente='"+guide.getCustomerId()+"'"
-                            + ",ci_transportista='"+guide.getCarrierCard()+"'"
-                                    + ",cod_zona='"+guide.getZoneCode()+"' WHERE idguia like '"+id+"'";
-       try{
-            PreparedStatement state = acceso.prepareStatement(sql);
-            state.executeUpdate();
-        }catch(SQLException ex){
+    }
+
+    public void updateGuide(Guide guide, String id) {
+        String sql = "UPDATE guia SET fechaenvio='" + guide.getSendDate() + "',fecha_entrega='" + guide.getDeliverDate() + "',cantidad='" + guide.getQuantity() + "',total='" + guide.getTotal() + "',ci_cliente='" + guide.getCustomerId() + "',ci_transportista='" + guide.getCarrierCard() + "',cod_zona='" + guide.getZoneCode() + "' WHERE idguia like '" + id + "'";
+
+        try {
+            Connection acceso = con.connect();
+            PreparedStatement ps = acceso.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
     }

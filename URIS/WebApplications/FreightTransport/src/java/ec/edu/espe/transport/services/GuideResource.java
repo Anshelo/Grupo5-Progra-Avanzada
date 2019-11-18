@@ -75,11 +75,12 @@ public class GuideResource {
     @Path("/updateguide/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean updateGuide(Guide objGuide, @PathParam("id") String id) throws SQLException{
+    public Guide updateGuide(Guide objGuide, @PathParam("id") String id) throws SQLException{
         GuideDAO guide=new GuideDAO();
         guide.updateGuide(objGuide,id);
-        //objGuide=guide.searchGuidebyId(id);
-        return true;
+        /*Guide guideOb=new Guide();
+        guideOb=guide.searchGuidebyId(id);*/
+        return objGuide;
     }
     @Path("/insertguide")
     @POST

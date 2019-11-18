@@ -1,14 +1,14 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <script src="../validations.js"></script>
-    <script src="../json.php"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/validations.js"></script>
+    <script src="../php/json.php"></script>
     <title>Formulario Guia</title>
 </head>
 
 <body>
-    <form name="guide">
+    <form name="guide" method="post" action="../php/guide.php">
         <div class="modal-body text-center">
             <div class="col-sm-8 main-section mx-auto">
                 <div class="modal-content">
@@ -17,39 +17,32 @@
                             <table class="table">
 
                                 <head>
-                                    <div class="tittle">
-                                        Guía de remisión
+                                    <div class="styletittle">
+                                        Guia de remision
                                     </div>
                                 </head>
                                 <tbody>
                                     <tr>
                                         <div class="form-group">
                                             <td>
-                                                <div class="label">Id Guía: </div>
+                                                <div class="label">Id Guia: </div>
                                             </td>
-                                            <td><input type="number" class="form-control" id="idguide" placeholder="1" autofocus min="1"></td>
+                                            <td><input type="number" class="form-control" name="idguide" placeholder="1" autofocus min="0"></td>
                                             <td colspan="3"></td>
-                                            <td>
-                                                <input input type="button" name="btnadd" value=" Registrar" class="btn btn-primary btn-block center ">
-
-                                            </td>
                                         </div>
                                     </tr>
                                     <tr>
                                         <div class="form-group">
                                             <td>
-                                                <div class="label">Fecha envío: </div>
+                                                <div class="label">Fecha envio: </div>
                                             </td>
-                                            <td><input type="date" value="" class="form-control" min="2018-01-01" max="2025-12-31" step="1" id="datesent" placeholder="2019-02-30"></td>
+                                            <td><input type="date" value="" class="form-control" min="2018-01-01" max="2025-12-31" step="1" name="datesent" placeholder="2019-02-30">
+                                            </td>
                                             <td></td>
                                             <td>
                                                 <div class="label">Fecha llegada: </div>
                                             </td>
-                                            <td><input type="date" value="" class="form-control" min="2018-01-01" max="2025-12-31" step="1" id="daterecive" placeholder="2019-02-30"></td>
-                                            <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Modificar
-                                                </button>
+                                            <td><input type="date" value="" class="form-control" min="2018-01-01" max="2025-12-31" step="1" name="datereceive" placeholder="2019-02-30">
                                             </td>
                                         </div>
                                     </tr>
@@ -61,26 +54,21 @@
                                                 </subtitles>
 
                                             </td>
-                                            <td>
-                                                <input input type="button" name="btnsearch" value=" Buscar" class="btn btn-primary btn-block center ">
-
-                                            </td>
                                         </div>
                                         <tr>
                                             <div class="form-group">
                                                 <td>
-                                                    <div class="label">Cédula: </div>
+                                                    <div class="label">Cedula: </div>
                                                 </td>
-                                                <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false"></td>
+                                                <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="
+                                                       if (!validarDocumento())
+                                                        alert('Cedula incorrecta');
+                                                    " onkeypress="return validatenumbers(event)" onpaste="return false"></td>
                                                 <td>
                                                     <div class="label">Nombre: </div>
                                                 </td>
                                                 <td colspan="2"><input type="text" class="form-control" name="namecustomer" placeholder="Juan Perez" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false"></td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-block center">
-                                                    Eliminar
-                                                </button>
-                                                </td>
+
                                             </div>
                                         </tr>
                                         <tr>
@@ -96,9 +84,10 @@
                                         <tr>
                                             <div class="form-group">
                                                 <td>
-                                                    <div class="label">Cédula: </div>
+                                                    <div class="label">Cedula: </div>
                                                 </td>
-                                                <td><input type="text" class="form-control" name="idcarrier" id="id" placeholder="1789654478" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false"></td>
+                                                <td><input type="text" class="form-control" name="idcarrier" id="id" placeholder="1789654478" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false">
+                                                </td>
                                                 <td>
                                                     <div class="label">Nombre: </div>
                                                 </td>
@@ -109,16 +98,16 @@
                                         <tr>
                                             <div class="form-group">
                                                 <td>
-                                                    <div class="label">Camión: </div>
+                                                    <div class="label">Camion: </div>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="typecamion" placeholder="Rígido" onkeypress="return validateletters(event)" onpaste="return false">
+                                                    <input type="text" class="form-control" name="typecamion" placeholder="Rigido" onkeypress="return validateletters(event)" onpaste="return false">
                                                 </td>
                                                 <td>
-                                                    <div class="label">Zona de envío: </div>
+                                                    <div class="label">Codigo zona envio: </div>
                                                 </td>
                                                 <td colspan="2">
-                                                    <input type="text" class="form-control" name="namezone" placeholder="Cuenca" onkeypress="return validateletters(event)" onpaste="return false">
+                                                    <input type="text" class="form-control" name="codezone" placeholder="1" onkeypress="return validatenumbers(event)" onpaste="return false">
                                                 </td>
                                             </div>
                                         </tr>
@@ -135,7 +124,7 @@
                                         <tr>
                                             <div class="form-group">
                                                 <td>
-                                                    <div class="label">Código </div>
+                                                    <div class="label">Codigo </div>
                                                 </td>
                                                 <td>
                                                     <div class="label">Nombre</div>
@@ -223,6 +212,23 @@
                                                 </td>
                                             </div>
                                             <div id="salida"></div>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Registrar">
+                                            </td>
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary btn-block center " name="option" value="Modificar">
+                                            </td>
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary btn-block center " name="option" value="Eliminar">
+                                            </td>
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary btn-block center " name="option" value="Buscar">
+                                            </td>
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary btn-block center" name="option" value="Ver registros">
+                                            </td>
                                         </tr>
                                 </tbody>
                             </table>

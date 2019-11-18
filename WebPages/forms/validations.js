@@ -68,3 +68,7 @@ function validateid() {
         document.guide.id.setfocus();
     }
 }
+
+function searchbyid() {
+    var idguide = document.getElementById("idguide").value;
+}
