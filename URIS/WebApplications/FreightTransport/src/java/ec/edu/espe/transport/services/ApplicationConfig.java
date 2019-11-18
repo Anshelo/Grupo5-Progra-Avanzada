@@ -27,6 +27,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ec.edu.espe.transport.services.CarrierResource.class);
+        resources.add(ec.edu.espe.transport.services.ClientResource.class);
         resources.add(ec.edu.espe.transport.services.CustomerResource.class);
         resources.add(ec.edu.espe.transport.services.GuideResource.class);
         resources.add(ec.edu.espe.transport.services.ProductResource.class);

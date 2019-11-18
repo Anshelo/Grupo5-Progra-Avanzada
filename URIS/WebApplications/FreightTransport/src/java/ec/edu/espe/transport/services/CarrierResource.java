@@ -80,6 +80,7 @@ public class CarrierResource {
         CarrierDAO carrierObj = new CarrierDAO();
        return carrierObj.addCarrier(carrier);
     }
+    
     @Path("getcarrierbytruck/{trucktype}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
