@@ -5,6 +5,8 @@
  */
 package ec.edu.espe.transport.services;
 
+import ec.edu.espe.transport.model.Carrier;
+import ec.edu.espe.transport.model.CarrierDAO;
 import ec.edu.espe.transport.model.DBConnect;
 import ec.edu.espe.transport.model.Product;
 import ec.edu.espe.transport.model.ProductDAO;
@@ -111,13 +113,16 @@ public class ProductResource {
       //  System.out.println(data.getCiudad());
     }    
     
-     @Path("/deleteProduct/{code}")
-     @DELETE
-     @Produces(MediaType.APPLICATION_JSON)
-    public void remove(@PathParam("code") String code) {
-        ProductDAO prod=new ProductDAO();
-        prod.eliminarProductoIdentificacion(code);
-         //System.out.println(code);
+    @DELETE
+    @Path("/deleteproduct/{code}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ArrayList<Product> deleteCarrier(@PathParam("code")String code) {
+        ProductDAO response = new ProductDAO();
+        response.eliminarProductoIdentificacion(code);
+        ProductDAO product=new ProductDAO();
+        ArrayList<Product> listProduct=new ArrayList<Product>();
+        listProduct=product.mostrarProductoCodigo(code);
+        return listProduct;
     }
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
