@@ -124,7 +124,6 @@ public class CarrierResource {
     @DELETE
     @Path("deletecarrier/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    
     public ArrayList<Carrier> deleteCarrier(@PathParam("id")int id) {
         CarrierDAO response = new CarrierDAO();
         response.deleteCarrier(id);

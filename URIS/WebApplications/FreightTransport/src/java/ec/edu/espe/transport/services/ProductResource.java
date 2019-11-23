@@ -114,7 +114,7 @@ public class ProductResource {
     }    
     
     @DELETE
-    @Path("/deleteproduct/{code}")
+    @Path("deleteProduct/{code}")
     @Consumes(MediaType.APPLICATION_JSON)
     public ArrayList<Product> deleteCarrier(@PathParam("code")String code) {
         ProductDAO response = new ProductDAO();
@@ -124,6 +124,8 @@ public class ProductResource {
         listProduct=product.mostrarProductoCodigo(code);
         return listProduct;
     }
+    
+    
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(Product content) {
