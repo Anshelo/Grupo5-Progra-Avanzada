@@ -42,6 +42,31 @@ public class ClientDAO {
         }
         return client;
     }
+    
+    public ArrayList<Client> showAllCustomers() {
+        Client client = new Client();
+        Connection acceso = con.connect();
+        ArrayList<Client> allCustomers = new ArrayList<>();
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM cliente");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                    client = new Client();
+                    client.setCiClient(rs.getString(1));
+                    client.setRucClient(rs.getString(2));
+                    client.setNameClient(rs.getString(3));
+                    client.setAddressClient(rs.getString(4));
+                    client.setPhoneClient(rs.getString(5));
+                    client.setMobileClient(rs.getString(6));
+                    client.setEmailClient(rs.getString(7));
+                allCustomers.add(client);
+                        
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return allCustomers;
+    }
 
     public Client searchClientByCi(String ci) {
         Client client = new Client();
