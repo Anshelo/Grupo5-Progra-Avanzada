@@ -122,7 +122,7 @@ public class CarrierResource {
         return listCarrier;
     }
     @DELETE
-    @Path("/deletecarrier/{id}")
+    @Path("deletecarrier/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public ArrayList<Carrier> deleteCarrier(@PathParam("id")int id) {
         CarrierDAO response = new CarrierDAO();

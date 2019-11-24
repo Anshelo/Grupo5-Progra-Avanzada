@@ -95,10 +95,11 @@ public class ClientResource {
     }
 
     @DELETE
-    @Path("/deleteClient/{ci}")
+    @Path("/deleteClient/{ciCustomer}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteClient(@PathParam("ci") String ci) {
+    public ArrayList<Client> deleteClient(@PathParam("ciCustomer") String ciCustomer) throws SQLException{
         ClientDAO deletedClient = new ClientDAO();
-        deletedClient.deleteClient(ci);
+        deletedClient.deleteClient(ciCustomer);
+        return deletedClient.showAllCustomers();
     }
 }
