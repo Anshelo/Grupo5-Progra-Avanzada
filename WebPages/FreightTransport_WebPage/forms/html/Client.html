@@ -3,14 +3,14 @@
 <head>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/validations.js"></script>
-	<script src="../php/json.php"></script>
+    <script src="../php/json.php"></script>
     <title>Formulario Cliente</title>
 </head>
 
 <body>
-    <div class = "modal-body">
-    <form name="client">
-        
+    <div class="modal-body">
+        <form name="client">
+
             <div class="col-sm-8 main-section mx-auto">
                 <div class="modal-content">
                     <div class="col-33 ">
@@ -28,10 +28,8 @@
                                             <td>
                                                 <div class="label">Cédula: </div>
                                             </td>
-                                            
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" 
-                                                        onchange="if (!validarDocumento())  cleanCI();"
-                                                        onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+
+                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td colspan="3"></td>
                                             <td>
                                                 <button class="btn btn-primary btn-block center">
@@ -41,32 +39,31 @@
                                         </div>
                                     </tr>
                                     <tr>
-                                            <div class="form-group">
-                                                <td>
-                                                    <div class="label">Nombre: </div>
-                                                </td>
-                                                <td colspan="2">
+                                        <div class="form-group">
+                                            <td>
+                                                <div class="label">Nombre: </div>
+                                            </td>
+                                            <td>
                                                 <input type="text" class="form-control" name="namecustomer" placeholder="Juan Perez" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false" required></td>
-                                                <td>
-                                                </td>
-                                                <td>
-                                                </td>    
-                                                <td>
-                                                    <button class="btn btn-primary btn-block center">
+                                            <td>
+                                            </td>
+                                            <td colspan="2"> </td>
+                                            <td>
+                                                <button class="btn btn-primary btn-block center">
                                                     Eliminar
                                                 </button>
-                                                </td>
-                                            </div>
-                                        </tr>
+                                            </td>
+                                        </div>
+                                    </tr>
                                     <tr>
                                         <div class="form-group">
                                             <td>
                                                 <div class="label">RUC: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="012345678901"  onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="012345678901" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td></td>
                                             <td>
-                                                
+
                                             </td>
                                             <td> </td>
                                             <td>
@@ -77,76 +74,82 @@
                                         </div>
                                     </tr>
                                     <tr>
-                                            <div class="form-group">
-                                                <td>
-                                                    <div class="label">Fono Convencional: </div>
-                                                </td>
-                                                <td><input type="text" class="form-control" name="fono1customer" id="id" placeholder="2736666"  onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                </td>
-                                                <td> </td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-block center">
+                                        <div class="form-group">
+                                            <td>
+                                                <div class="label">Fono Convencional: </div>
+                                            </td>
+                                            <td><input type="text" class="form-control" name="fono1customer" id="id" placeholder="2736666" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td></td>
+                                            <td>
+
+                                            </td>
+                                            <td> </td>
+                                            <td>
+                                                <button class="btn btn-primary btn-block center">
                                                        Actualizar
                                                     </button>
-                                                </td>
-                                            </div>
+                                            </td>
+                                        </div>
                                     </tr>
                                     <tr>
-                                            <div class="form-group">
-                                                <td>
-                                                    <div class="label">Número celular: </div>
-                                                </td>
-                                                <td><input type="text" class="form-control" name="fono2customer" id="id" placeholder="0998764876"  onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                </td> <td> </td><td> </td>
-                                            
-                                            </div>
-                                    </tr>  
-                                    <tr>
-                                            <div class="form-group">
-                                                <td>
-                                                    <div class="label">Correo Electrónico: </div>
-                                                </td>
-                                                <td><input type="email" class="form-control" name="fono2customer" id="id" placeholder="espe@ccccc.cc"  required></td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                </td> <td> </td><td> </td>
-                                            
-                                            </div>
+                                        <div class="form-group">
+                                            <td>
+                                                <div class="label">Número celular: </div>
+                                            </td>
+                                            <td><input type="text" class="form-control" name="fono2customer" id="id" placeholder="0998764876" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td></td>
+                                            <td>
+
+                                            </td>
+                                            <td> </td>
+                                            <td> </td>
+
+                                        </div>
                                     </tr>
                                     <tr>
-                                            <div class="form-group">
-                                                <td>
-                                                    <div class="label">Dirección: </div>
-                                                </td>
-                                                <td><textarea class="form-control textarea-client" name="fono2customer" id="id" placeholder="Mi dirección de vivienda"  required></textarea></td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                </td> <td> </td><td> </td>
-                                            
-                                            </div>
-                                    </tr>      
-                                        
-                                      
-                                        
+                                        <div class="form-group">
+                                            <td>
+                                                <div class="label">Correo Electrónico: </div>
+                                            </td>
+                                            <td><input type="email" class="form-control" name="fono2customer" id="id" placeholder="espe@ccccc.cc" required></td>
+                                            <td></td>
+                                            <td>
+
+                                            </td>
+                                            <td> </td>
+                                            <td> </td>
+
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="form-group">
+                                            <td>
+                                                <div class="label">Dirección: </div>
+                                            </td>
+                                            <td><textarea class="form-control textarea-client" name="fono2customer" id="id" placeholder="Mi dirección de vivienda" required></textarea></td>
+                                            <td></td>
+                                            <td>
+
+                                            </td>
+                                            <td> </td>
+                                            <td> </td>
+
+                                        </div>
+                                    </tr>
+
+
+
                                 </tbody>
                             </table>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+    </div>
+    </div>
     </form>
 
-</div>
+    </div>
 </body>
 
 </html>
