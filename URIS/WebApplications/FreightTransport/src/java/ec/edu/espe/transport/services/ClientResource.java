@@ -8,7 +8,7 @@ package ec.edu.espe.transport.services;
 import ec.edu.espe.transport.model.Carrier;
 import ec.edu.espe.transport.model.CarrierDAO;
 import ec.edu.espe.transport.model.Client;
-import ec.edu.espe.control.ClientDAO;
+import ec.edu.espe.transportist.control.ClientDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;

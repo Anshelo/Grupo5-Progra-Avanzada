@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.edu.espe.transport.model;
+package ec.edu.espe.transportist.control;
 
 
+import ec.edu.espe.transport.model.DBConnect;
+import ec.edu.espe.transport.model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
