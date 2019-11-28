@@ -1,0 +1,14 @@
+{
+    "name": "david/david",
+    "type": "project",
+    "require": {
+        "google/apiclient": "~2.0"
+    },
+    "authors": [
+        {
+            "name": "David Alexander Puebla Montero",
+            "email": "david_puebla20@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
