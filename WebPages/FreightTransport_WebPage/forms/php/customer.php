@@ -1,26 +1,42 @@
 <?php
 $opcion=$_POST['option'];
 if ($opcion =='Registrar'):
-    $url = "http://localhost:1024/FreightTransport/project/guide/insertguide";
-    $idguide = $_POST['idguide'];
-    $datesent = $_POST['datesent'];
-    $datereceive = $_POST['datereceive'];
-    $quantity = $_POST['quantityguide'];
-    $total = $_POST['totalguide'];
-    $idcustomer = $_POST['idcustomer'];
-    $idcarrier = $_POST['idcarrier'];
-    $codezone = $_POST['codezone'];    
-    $data =array('guideId' =>$idguide, 'sendDate'=>$datesent, 'deliverDate'=>$datereceive,'quantity'=>$quantity,'total'=>$total,
-    'customerId'=>$idcustomer, 'carrierCard'=>$idcarrier,'zoneCode'=>$codezone);    
+    //$url = "http://localhost:1024//FreightTransport/project/client/addClient";
+    
+    $url = "http://localhost:8080/FreightTransport/project/client/addClient";
+    $idCustomer = $_POST['idcustomer'];
+    $nameCustomer = $_POST['namecustomer'];
+    $rucCustomer = $_POST['ruccustomer'];
+    $fonoCustomer = $_POST['fono1customer'];
+    $cellphoneCustomer = $_POST['fono2customer'];
+    $emailCustomer = $_POST['emailCustomer'];
+    $addressCustomer = $_POST['addressCustomer'];
+
+    $data =array('ci' =>$idCustomer, 'ruc'=>$rucCustomer,
+                 'nombre'=>$nameCustomer,'direccion'=>$addressCustomer,'telfconvencional'=>$fonoCustomer,
+                 'telfcelular'=>$cellphoneCustomer,'correo'=>$emailCustomer);    
+    
     $cli=curl_init($url);
-    curl_setopt($cli, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    curl_setopt($cli, CURLOPT_POST,true);
-    curl_setopt($cli, CURLOPT_POSTFIELDS,json_encode($data));
     curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
+    //curl_setopt($cli, CURLOPT_URL,$url);
+    curl_setopt($cli, CURLOPT_POST,true);
+    curl_setopt($cli, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_setopt($cli, CURLOPT_POSTFIELDS,json_encode($data));
+
     $respone = curl_exec($cli);
+    
+    if($respone == false){    
+        echo"<center> <h1>Cliente Si Registrado</h1></center>";
+       echo $nameCustomer;
+    }else{
+        echo"<center> <h1>Cliente No Registrado</h1></center>";
+        echo $idCustomer;
+        
+    }
+    
     curl_close($cli);
-    echo"<center> <h1>GUIDE REGISTER</h1></center>";
-elseif ($opcion == 'Ver registros'):
+    
+    elseif ($opcion == 'Ver registros'):
         echo " <center><h1>SHOW GUIDES</h1></center>";
         $data = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/guide/showallguides"),true);
         ?>
@@ -57,31 +73,29 @@ elseif ($opcion == 'Ver registros'):
             </center>
             <?php 
             elseif ($opcion == 'Buscar'):
-                $id = $_POST['idguide'];
-                echo " <center><h1>SHOW GUIDES</h1></center>";
-                $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/guide/showguidebyid/$id"),true);
+                $id = $_POST['idcustomer'];
+                echo " <center><h1>Cliente</h1></center>";
+                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/client/searchClient/$id"),true);
                 ?>
                 <center><table border="1" >
                         <tr>
-                            <td>idguide</td>
-                            <td>datesent</td>
-                            <td>datereceive</td>
-                            <td>quantityguide</td>
-                            <td>totalguide</td>
-                            <td>idcustomer</td>	
-                            <td>idcarrier</td>
-                            <td>codezone</td>		
+                            <td>ci</td>
+                            <td>ruc</td>
+                            <td>nombre</td>
+                            <td>direccion</td>
+                            <td>telefono convencional</td>
+                            <td>telefono celular</td>	
+                            <td>correo</td>	
                         </tr>
         
                         <tr>
-                            <td><?php echo $dataId['guideId'] ?></td>
-                            <td><?php echo $dataId['sendDate'] ?></td>
-                            <td><?php echo $dataId['deliverDate'] ?></td>
-                            <td><?php echo $dataId['quantity']?></td>
-                            <td><?php echo $dataId['total']?></td>
-                            <td><?php echo $dataId['customerId'] ?></td>
-                            <td><?php echo $dataId['carrierCard']?></td>
-                            <td><?php echo $dataId['zoneCode']?></td>
+                            <td><?php echo $dataId['ciClient'] ?></td>
+                            <td><?php echo $dataId['rucClient'] ?></td>
+                            <td><?php echo $dataId['nameClient'] ?></td>
+                            <td><?php echo $dataId['addressClient']?></td>
+                            <td><?php echo $dataId['phoneClient']?></td>
+                            <td><?php echo $dataId['mobileClient'] ?></td>
+                            <td><?php echo $dataId['emailClient']?></td>
                         </tr>
                         <?php 
                         

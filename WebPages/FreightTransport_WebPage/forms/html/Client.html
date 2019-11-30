@@ -28,10 +28,10 @@
                                                 <div class="label">Cédula: </div>
                                             </td>
 
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td colspan="3"></td>
                                             <td>
-                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Registrar" style="background-color: rgb(52, 162, 212);">
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Buscar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -55,7 +55,8 @@
                                             <td>
                                                 <div class="label">RUC: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="ruccustomer" id="ruccustomer" placeholder="012345678901" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td>
+                                                <input type="text" class="form-control" name="ruccustomer" id="ruccustomer" placeholder="012345678901" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td></td>
                                             <td>
 
@@ -78,7 +79,7 @@
                                             </td>
                                             <td> </td>
                                             <td>
-                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Actualizar" style="background-color: rgb(52, 162, 212);">
+                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Registrar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -102,7 +103,7 @@
                                             <td>
                                                 <div class="label">Correo Electrónico: </div>
                                             </td>
-                                            <td><input type="email" class="form-control" name="fono2customer" id="id" placeholder="espe@ccccc.cc" required></td>
+                                            <td><input type="email" class="form-control" name="emailCustomer" id="emailCustomer" placeholder="espe@ccccc.cc" required></td>
                                             <td></td>
                                             <td>
 
@@ -117,21 +118,11 @@
                                             <td>
                                                 <div class="label">Dirección: </div>
                                             </td>
-                                            <td><textarea class="form-control textarea-client" name="fono2customer" id="id" placeholder="Mi dirección de vivienda" required></textarea></td>
-                                            <td></td>
-                                            <td>
-
-                                            </td>
-                                            <td> </td>
-                                            <td> </td>
-
+                                            <td><textarea class="form-control textarea-client" name="addressCustomer" id="addressCustomer" placeholder="Mi dirección de vivienda" required></textarea></td>
+                                
                                         </div>
                                     </tr>
-                                    
-
-
-
-                                </tbody>
+                               </tbody>
                             </table>
                         </form>
                     </div>
