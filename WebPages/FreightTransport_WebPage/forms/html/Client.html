@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
 
 <head>
     <link rel="stylesheet" href="../css/styles.css">
@@ -8,10 +8,8 @@
 </head>
 
 <body>
-
-    <div class="modal-body text-center" >
-        <form name="client" method="post" action="../php/customer.php>
-
+    <div class="modal-body text-center">
+        <form name="client" method="post" action="../php/customer.php">
             <div class="col-sm-8 main-section mx-auto">
                 <div class="modal-content">
                     <div class="col-33 ">
@@ -33,9 +31,7 @@
                                             <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td colspan="3"></td>
                                             <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Registrar
-                                                </button>
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Registrar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -50,9 +46,7 @@
                                             </td>
                                             <td colspan="2"> </td>
                                             <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Eliminar
-                                                </button>
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Eliminar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -61,16 +55,14 @@
                                             <td>
                                                 <div class="label">RUC: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="012345678901" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="ruccustomer" id="ruccustomer" placeholder="012345678901" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
                                             <td></td>
                                             <td>
 
                                             </td>
                                             <td> </td>
                                             <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                    Modificar
-                                                </button>
+                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Modificar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -86,9 +78,7 @@
                                             </td>
                                             <td> </td>
                                             <td>
-                                                <button class="btn btn-primary btn-block center">
-                                                       Actualizar
-                                                    </button>
+                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Actualizar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -137,6 +127,7 @@
 
                                         </div>
                                     </tr>
+                                    
 
 
 
