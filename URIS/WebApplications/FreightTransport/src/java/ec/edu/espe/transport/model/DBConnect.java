@@ -18,7 +18,7 @@ public class DBConnect {
     String bd = "database_transportes";
     String url = "jdbc:mysql://localhost/" + bd;
     String user = "root";
-    String pass = "root";
+    String pass = "";
 
     public Connection connect() {
         try {

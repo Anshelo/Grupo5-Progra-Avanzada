@@ -12,9 +12,9 @@ if ($opcion =='Registrar'):
     $emailCustomer = $_POST['emailCustomer'];
     $addressCustomer = $_POST['addressCustomer'];
 
-    $data =array('ci' =>$idCustomer, 'ruc'=>$rucCustomer,
-                 'nombre'=>$nameCustomer,'direccion'=>$addressCustomer,'telfconvencional'=>$fonoCustomer,
-                 'telfcelular'=>$cellphoneCustomer,'correo'=>$emailCustomer);    
+    $data =array('ciClient' =>$idCustomer, 'rucClient'=>$rucCustomer,
+                 'nameClient'=>$nameCustomer,'addressClient'=>$addressCustomer,'phoneClient'=>$fonoCustomer,
+                 'mobileClient'=>$cellphoneCustomer,'emailClient'=>$emailCustomer);    
     
     $cli=curl_init($url);
     curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
@@ -75,6 +75,7 @@ if ($opcion =='Registrar'):
             elseif ($opcion == 'Buscar'):
                 $id = $_POST['idcustomer'];
                 echo " <center><h1>Cliente</h1></center>";
+                // $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
                 $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/client/searchClient/$id"),true);
                 ?>
                 <center><table border="1" >
