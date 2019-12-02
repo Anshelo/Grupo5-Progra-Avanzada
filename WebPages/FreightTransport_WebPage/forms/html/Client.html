@@ -9,7 +9,7 @@
 
 <body>
     <div class="modal-body text-center">
-        <form name="client" method="post" action="../php/customer.php">
+        <form name="Client" method="post" action="../php/customer.php">
             <div class="col-sm-8 main-section mx-auto">
                 <div class="modal-content">
                     <div class="col-33 ">
@@ -28,7 +28,8 @@
                                                 <div class="label">Cédula: </div>
                                             </td>
 
-                                            <td><input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="idcustomer" id="idcustomer" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false"
+                                                    required></td>
                                             <td colspan="3"></td>
                                             <td>
                                                 <input type="submit" class="btn btn-primary btn-block center " name="option" value="Buscar" style="background-color: rgb(52, 162, 212);">
@@ -63,7 +64,7 @@
                                             </td>
                                             <td> </td>
                                             <td>
-                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Modificar" style="background-color: rgb(52, 162, 212);">
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Modificar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -79,7 +80,7 @@
                                             </td>
                                             <td> </td>
                                             <td>
-                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Registrar" style="background-color: rgb(52, 162, 212);">
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Registrar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -119,10 +120,10 @@
                                                 <div class="label">Dirección: </div>
                                             </td>
                                             <td><textarea class="form-control textarea-client" name="addressCustomer" id="addressCustomer" placeholder="Mi dirección de vivienda" required></textarea></td>
-                                
+
                                         </div>
                                     </tr>
-                               </tbody>
+                                </tbody>
                             </table>
                         </form>
                     </div>
