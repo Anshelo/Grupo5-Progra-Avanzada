@@ -116,18 +116,23 @@ if ($opcion =='Registrar'):
             curl_close($ch);
             echo"<center> <h2>GUIDE DELETE</h2></center>";   
          elseif ($opcion == 'Modificar'):  
+            $idCustomer = $_POST['idcustomer'];
+            $nameCustomer = $_POST['namecustomer'];
+            $rucCustomer = $_POST['ruccustomer'];
+            $fonoCustomer = $_POST['fono1customer'];
+            $cellphoneCustomer = $_POST['fono2customer'];
+            $emailCustomer = $_POST['emailCustomer'];
+            $addressCustomer = $_POST['addressCustomer'];
             
-            $idgui = $_POST['idguide'];
-            $datesentm = $_POST['datesent'];
-            $datereceivem = $_POST['datereceive'];
-            $quantitym = $_POST['quantityguide'];
-            $totalm = $_POST['totalguide'];
-            $idcustomerm = $_POST['idcustomer'];
-            $idcarrierm = $_POST['idcarrier'];
-            $codezonem = $_POST['codezone'];          
-            $url = "http://localhost:1024/FreightTransport/project/guide/updateguide/$idgui";         
-            $data =array('sendDate'=>$datesentm, 'deliverDate'=>$datereceivem,'quantity'=>$quantitym,'total'=>$totalm,
-            'customerId'=>$idcustomerm, 'carrierCard'=>$idcarrierm,'zoneCode'=>$codezonem);  
+            $url = "http://localhost:8080/FreightTransport/project/client/updateclient/$idCustomer";
+         // $url = "http://localhost:1024/FreightTransport/project/client/updateclient/$idCustomer";  
+
+            
+        
+            $data =array('ciClient' =>$idCustomer, 'rucClient'=>$rucCustomer,
+                         'nameClient'=>$nameCustomer,'addressClient'=>$addressCustomer,'phoneClient'=>$fonoCustomer,
+                         'mobileClient'=>$cellphoneCustomer,'emailClient'=>$emailCustomer);          
+                   
             $data_json = json_encode($data);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -135,9 +140,16 @@ if ($opcion =='Registrar'):
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
             curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response  = curl_exec($ch);
+            
+            $ch  = curl_exec($ch);
+            if($ch == false){    
+                echo"<center> <h1>Cliente Si Registrado</h1></center>";
+                echo $data_json;
+            }else{
+                echo"<center> <h1>Cliente No Registrado</h1></center>";
+                echo $ch;
+            }
             curl_close($ch);
-            echo"<center> <h2>GUIDE MODIFY</h2></center>"; 
-            echo $data_json; 
-       endif;
-		 ?>
+             
+    endif;
+ ?>
