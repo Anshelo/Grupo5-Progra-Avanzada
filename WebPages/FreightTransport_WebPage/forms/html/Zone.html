@@ -2,175 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/font-awesome.css">
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="../js/validations.js"></script>
     <title>Formulario zona</title>
 </head>
 
 <body>
-    <div class="modal-body">
-        <br>
-        <center>
-            <h1 class="styletittle">Administracion Zonal de Transporte</h1>
-        </center>
-        <br>
-        <div class="wrap">
-            <ul class="tabs">
-                <li><a href="#tab1"><span class="fa fa-list-ul"></span><span class="tab-text">Registrar Zona</span></a>
-                </li>
-                <li><a href="#tab2"><span class="fa fa-pencil"></span><span class="tab-text">Modificar Zona</span></a>
-                </li>
-                <li><a href="#tab3"><span class="fa fa-search"></span><span class="tab-text">Buscar Zona</span></a></li>
-                <li><a href="#tab4"><span class="fa fa-trash"></span><span class="tab-text">Eliminar Zona</span></a>
-                </li>
-            </ul>
-
-            <div class="secciones">
-                <article id="tab1">
-                    <div class="col-sm-8 main-section mx-auto">
-                        <div class="modal-content">
-                            <div class="col-33">
-                                <form class="col-33"><br>
-
-                                    <head>
-                                        <center>
-                                            <h1>Registrar Zona</h1>
-                                        </center>
-                                    </head>
-
+    <form name="product">
+        <div class="modal-body text-center">
+            <div class="col-sm-8 main-section mx-auto">
+                <div class="modal-content">
+                    <div class="col-33 ">
+                        <form class="col-33"><br>
+                            <table class="table">
+    
+                                <head>
+    
+                                    <div class="styletittle">
+                                        Zona De Transporte
+                                    </div>
+                                </head>
+                                <tbody>
+    
                                     <tr>
-                                        <div class="from-group">
+                                        <br>
+                                        <IMG SRC="../images/zone.png"><br><br><br>
+                                        <center></center>
+                                        <div class="form-group">
                                             <td>
-                                                <div class="label">Numero de Zona: </div>
+                                                <div class="label">Codigo Zona: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false" required>
-                                            </td>
-                                            <td colspan="3"></td>
-                                            <br>
-                                            <td>
-                                                <div class="label">Nombre: </div>
-                                            </td>
-                                            <td colspan="2"><input type="text" class="form-control" name="namecustomer" placeholder="Quito" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false" required>
-                                            </td>
-                                            <br>
-                                            <button class="btn btn-primary btn-block center">
-                                                Registrar
-                                            </button>
+                                            <td><input type="number" class="form-control" name="idproduct" placeholder="1"
+                                                    autofocus min="1" onkeypress="return tecla()"
+                                                    onsubmit="return verificaUser();" onpaste="return false"
+                                                    onfocus="return false" autofocus required></td>
+    
                                         </div>
                                     </tr>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article id="tab2">
-                    <div class="col-sm-8 main-section mx-auto">
-                        <div class="modal-content">
-                            <div class="col-33">
-                                <form class="col-33"><br>
-                                    <center>
-                                        <h1>Modificar Zona</h1>
-                                    </center>
                                     <tr>
-                                        <div class="from-group">
+                                        <div class="form-group">
                                             <td>
-                                                <div class="label">Numero de Zona: </div>
+                                                <div class="label">Nombre de la Zona: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false" required>
-                                            </td>
-                                            <td colspan="3"></td>
-                                            <br>
-                                            <td>
-                                                <div class="label">Nombre: </div>
-                                            </td>
-                                            <td colspan="2"><input type="text" class="form-control" name="namecustomer" placeholder="Quito" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false" required>
-                                            </td>
-                                            <br>
-                                            <button class="btn btn-primary btn-block center">
-                                                Modificar
-                                            </button>
+                                            <td><input type="text" class="form-control" name="nameproduct"
+                                                    placeholder="Quito" onkeypress="return soloLetras(event)"
+                                                    onsubmit="return verificaUser();" onpaste="return false"
+                                                    onfocus="return false" required></td>
                                         </div>
                                     </tr>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article id="tab3">
-                    <div class="col-sm-8 main-section mx-auto">
-                        <div class="modal-content">
-                            <div class="col-33">
-                                <form class="col-33"><br>
-                                    <center>
-                                        <h1>Buscar Zona</h1>
-                                    </center>
+    
                                     <tr>
-                                        <div class="from-group">
+                                        <div class="form-group">
                                             <td>
-                                                <div class="label">Numero de Zona: </div>
+                                                <button class="btn btn-primary btn-block center">
+                                                    Registrar
+                                                </button>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false" required>
-                                            </td>
-                                            <td colspan="3"></td>
-                                            <br>
                                             <td>
-                                                <div class="label">Nombre: </div>
+                                                <button class="btn btn-primary btn-block center">
+                                                    Modificar
+                                                </button>
                                             </td>
-                                            <td colspan="2"><input type="text" class="form-control" name="namecustomer" placeholder="Quito" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false" required>
+                                            <td>
+                                                <button class="btn btn-primary btn-block center">
+                                                    Elimiar
+                                                </button>
                                             </td>
-                                            <br>
-                                            <button class="btn btn-primary btn-block center">
-                                                Buscar
-                                            </button>
+                                            <td>
+                                                <button class="btn btn-primary btn-block center">
+                                                    Eliminar
+                                                </button>
+                                            </td>
                                         </div>
                                     </tr>
-                                </form>
-                            </div>
-                        </div>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
-                </article>
-                <article id="tab4">
-                    <div class="col-sm-8 main-section mx-auto">
-                        <div class="modal-content">
-                            <div class="col-33">
-                                <form class="col-33"><br>
-                                    <center>
-                                        <h1>Eliminar Zona</h1>
-                                    </center>
-                                    <tr>
-                                        <div class="from-group">
-                                            <td>
-                                                <div class="label">Numero de Zona: </div>
-                                            </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1" onchange="validateid()" onkeypress="return validatenumbers(event)" onpaste="return false" required>
-                                            </td>
-                                            <td colspan="3"></td>
-                                            <br>
-                                            <td>
-                                                <div class="label">Nombre: </div>
-                                            </td>
-                                            <td colspan="2"><input type="text" class="form-control" name="namecustomer" placeholder="Quito" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false" required>
-                                            </td>
-                                            <br>
-                                            <button class="btn btn-primary btn-block center">
-                                                Eliminar
-                                            </button>
-                                        </div>
-                                    </tr>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                </div>
             </div>
         </div>
-
-    </div>
+        </div>
+    </form>
 </body>
 
 </html>
