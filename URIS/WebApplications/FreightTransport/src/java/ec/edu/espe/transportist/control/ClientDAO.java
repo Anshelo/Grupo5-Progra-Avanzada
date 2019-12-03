@@ -111,7 +111,7 @@ public class ClientDAO {
     public void deleteClient(String ci) {
         try {
             Connection accesoDB = con.connect();
-            PreparedStatement ps = accesoDB.prepareStatement("DELETE FROM cliente where codigotransp='" + ci + "'");
+            PreparedStatement ps = accesoDB.prepareStatement("DELETE FROM cliente where ci='" + ci + "'");
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
