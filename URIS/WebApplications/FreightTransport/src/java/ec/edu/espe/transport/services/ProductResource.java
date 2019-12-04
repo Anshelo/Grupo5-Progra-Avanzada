@@ -9,6 +9,7 @@ import ec.edu.espe.transport.model.Carrier;
 import ec.edu.espe.transport.model.CarrierDAO;
 import ec.edu.espe.transport.model.DBConnect;
 import ec.edu.espe.transport.model.Product;
+import ec.edu.espe.transportist.control.ClientDAO;
 import ec.edu.espe.transportist.control.ProductDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -113,16 +114,13 @@ public class ProductResource {
       //  System.out.println(data.getCiudad());
     }    
     
-    @DELETE
-    @Path("deleteProduct/{code}")
+   @DELETE
+    @Path("/deleteProduct/{code}")
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ArrayList<Product> deleteCarrier(@PathParam("code")String code) {
-        ProductDAO response = new ProductDAO();
-        response.eliminarProductoIdentificacion(code);
-        ProductDAO product=new ProductDAO();
-        ArrayList<Product> listProduct=new ArrayList<Product>();
-        listProduct=product.mostrarProductoCodigo(code);
-        return listProduct;
+    public void deleteClient(@PathParam("code") String code) throws SQLException{
+        ProductDAO deletedProduct = new ProductDAO();
+        deletedProduct.eliminarProductoIdentificacion(code);
     }
     
     
