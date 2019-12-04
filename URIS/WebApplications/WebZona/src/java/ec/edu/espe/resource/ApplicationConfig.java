@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity.service;
+package ec.edu.espe.resource;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,12 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(Entity.service.ClienteFacadeREST.class);
-        resources.add(Entity.service.GuiaFacadeREST.class);
-        resources.add(Entity.service.ProductoFacadeREST.class);
-        resources.add(Entity.service.TransportistaFacadeREST.class);
-        resources.add(Entity.service.UsersFacadeREST.class);
-        resources.add(Entity.service.ZonaFacadeREST.class);
+        resources.add(ec.edu.espe.resource.ZoneResource.class);
     }
     
 }
