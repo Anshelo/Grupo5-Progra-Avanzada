@@ -106,15 +106,16 @@ if ($opcion =='Registrar'):
                     </center>
                     <?php 
         elseif ($opcion == 'Eliminar'):
-            $idG = $_POST['idguide'];
-            $url = "http://localhost:1024/FreightTransport/project/guide/removeguide/$idG";           
+            $idC = $_POST['idcustomer'];
+			//$url = "http://localhost:1024/FreightTransport/project/client/deleteClient/$idC";
+            $url = "http://localhost:8080/FreightTransport/project/client/deleteClient/$idC";           
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
             curl_close($ch);
-            echo"<center> <h2>GUIDE DELETE</h2></center>";   
+            echo"<center> <h2>CUSTOMER DELETE</h2></center>";   
          elseif ($opcion == 'Modificar'):  
             $idCustomer = $_POST['idcustomer'];
             $nameCustomer = $_POST['namecustomer'];
