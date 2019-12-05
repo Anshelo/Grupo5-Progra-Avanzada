@@ -49,6 +49,31 @@ public class ProductDAO {
         }
         return listaB;
     }
+    
+    public ArrayList<Product> printProducto(){
+        ArrayList <Product> listaB=new ArrayList <Product>();
+        Product Producto;
+        try{
+            Connection acceso = con.connect();
+            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM producto ");
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+                Producto=new Product();
+                Producto.setProductCode(rs.getString(1));
+                Producto.setProductName(rs.getString(2));
+                Producto.setDescription(rs.getString(3));
+                Producto.setWeight(rs.getDouble(4));
+                Producto.setSensibility(rs.getString(5));
+                Producto.setUnitValue(rs.getDouble(6));
+                listaB.add(Producto);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return listaB;
+    }
+ 
+
  
     public void eliminarProductoIdentificacion(String cod){
         try {

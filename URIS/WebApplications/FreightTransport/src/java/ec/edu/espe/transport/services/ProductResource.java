@@ -123,6 +123,15 @@ public class ProductResource {
         deletedProduct.eliminarProductoIdentificacion(code);
     }
     
+    @Path("getproducts")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Product> getProduct() {
+        ProductDAO productList = new ProductDAO();
+         ArrayList<Product> productVO=new ArrayList<Product>();
+         productVO = productList.printProducto();
+         return productVO;
+    }
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
