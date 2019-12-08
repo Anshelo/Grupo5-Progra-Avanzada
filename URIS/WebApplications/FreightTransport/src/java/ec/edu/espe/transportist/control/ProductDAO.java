@@ -26,6 +26,30 @@ public class ProductDAO {
     public ProductDAO() {
         con=new DBConnect();
     }
+    
+    public Product searchproductByCi(String id) {
+        Product product = new Product();
+        Connection acceso = con.connect();
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM producto");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                if (id.equals(rs.getString(1))) {
+                    product = new Product();
+                    product.setProductCode(rs.getString(1));
+                    product.setProductName(rs.getString(2));
+                    product.setDescription(rs.getString(3));
+                    product.setWeight(rs.getDouble(4));
+                    product.setSensibility(rs.getString(5));
+                    product.setUnitValue(rs.getDouble(6));
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return product;
+    }
 
     public ArrayList<Product> mostrarProducto(float peso){
         ArrayList <Product> listaB=new ArrayList <Product>();

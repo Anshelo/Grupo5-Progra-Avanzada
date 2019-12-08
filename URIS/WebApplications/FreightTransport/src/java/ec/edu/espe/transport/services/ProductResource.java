@@ -81,6 +81,15 @@ public class ProductResource {
         return producto;
     }
     
+    @Path("searchProduct/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product getCarrierTruck(@PathParam("id") String id) {
+        ProductDAO searchedProduct = new ProductDAO();
+        return searchedProduct.searchproductByCi(id);
+    }
+
+    
     
     @PUT
     @Path("/modify/product")
