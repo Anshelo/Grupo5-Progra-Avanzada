@@ -11,9 +11,9 @@ if ($opcion =='Registrar'):
     $selectSensibility = $_POST['selectsensibility'];
     $unityvalueproduct = $_POST['unityValueproduct'];
 
-    $data =array('idProd' =>$idProduct,
-                 'nameProd'=>$nameProduct,'selectdes'=>$selectdescription,'weigthProd'=>$weightProduct,
-                 'selectSens'=>$selectSensibility,'unityvalue'=>$unityvalueproduct);    
+    $data =array('productCode' =>$idProduct,
+                 'productName'=>$nameProduct,'description'=>$selectdescription,'weight'=>$weightProduct,
+                 'sensibility'=>$selectSensibility,'unitValue'=>$unityvalueproduct);    
     
     $cli=curl_init($url);
     curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
@@ -79,21 +79,21 @@ if ($opcion =='Registrar'):
                 ?>
                 <center><table border="1" >
                         <tr>
-                            <td>id</td>
-                            <td>nombre</td>
+                            <td>codigoprod</td>
+                            <td>nombreprod</td>
                             <td>descripcion</td>
                             <td>peso</td>
                             <td>sensibilidad</td>
-                            <td>valor unitario</td>	
+                            <td>valorunit</td>	
                         </tr>
         
                         <tr>
-                            <td><?php echo $dataId['idProd'] ?></td>
-                            <td><?php echo $dataId['nameProd'] ?></td>
-                            <td><?php echo $dataId['selectdes'] ?></td>
-                            <td><?php echo $dataId['weigthProd']?></td>
-                            <td><?php echo $dataId['selectSens']?></td>
-                            <td><?php echo $dataId['unityvalue'] ?></td>
+                            <td><?php echo $dataId['productCode'] ?></td>
+                            <td><?php echo $dataId['productName'] ?></td>
+                            <td><?php echo $dataId['description'] ?></td>
+                            <td><?php echo $dataId['weight']?></td>
+                            <td><?php echo $dataId['sensibility']?></td>
+                            <td><?php echo $dataId['unitValue'] ?></td>
                         </tr>
                         <?php 
                         
@@ -126,9 +126,9 @@ if ($opcion =='Registrar'):
 
             
         
-            $data =array('idProd' =>$idProduct,
-                         'nameProd'=>$nameProduct,'selectdes'=>$selectdescription,'weigthProd'=>$weightProduct,
-                         'selectSens'=>$selectSensibility,'unityvalue'=>$unityvalueproduct);       
+            $data =array('productCode' =>$idProduct,
+		                 'productName'=>$nameProduct,'description'=>$selectdescription,'weight'=>$weightProduct,
+		                 'sensibility'=>$selectSensibility,'unitValue'=>$unityvalueproduct);       
                    
             $data_json = json_encode($data);
             $ch = curl_init();
