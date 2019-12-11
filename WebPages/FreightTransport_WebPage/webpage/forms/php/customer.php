@@ -44,7 +44,14 @@ if ($opcion =='Registrar'):
                 ?>
 				
 				 <html lang="en">
-        
+        <head>
+        <link rel="stylesheet" href="../css/styles.css">
+            <title>Cliente</title>
+        </head>
+        <body>
+        <body class="col-sm-8 main-section mx-auto">
+            <br>
+        <div class="styletittle">
                                         Datos del cliente
                                     </div><br>
                 <center><table class="table" border="1"  >
