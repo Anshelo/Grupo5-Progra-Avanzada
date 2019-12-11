@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
         resources.add(ec.edu.espe.transport.services.CustomerResource.class);
         resources.add(ec.edu.espe.transport.services.GuideResource.class);
         resources.add(ec.edu.espe.transport.services.ProductResource.class);
+         resources.add(ec.edu.espe.transport.services.ZoneResource.class);
     }
     
 }
