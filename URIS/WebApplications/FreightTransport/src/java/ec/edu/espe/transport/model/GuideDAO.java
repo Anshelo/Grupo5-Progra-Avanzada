@@ -132,17 +132,6 @@ public class GuideDAO {
         }
     }
 
-    public void deleteGuideDetail(String guideId) {
-        Connection acceso = con.connect();
-        String sql = "DELETE FROM detalleguia WHERE idguia='" + guideId + "'";
-        try {
-            PreparedStatement state = acceso.prepareStatement(sql);
-            state.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-    }
-
     public void updateGuide(Guide guide, String id) {
         String sql = "UPDATE guia SET fechaenvio='" + guide.getSendDate() + "',fecha_entrega='" + guide.getDeliverDate() + "',cantidad='" + guide.getQuantity() + "',total='" + guide.getTotal() + "',ci_cliente='" + guide.getCustomerId() + "',ci_transportista='" + guide.getCarrierCard() + "',cod_zona='" + guide.getZoneCode() + "' WHERE idguia like '" + id + "'";
 
