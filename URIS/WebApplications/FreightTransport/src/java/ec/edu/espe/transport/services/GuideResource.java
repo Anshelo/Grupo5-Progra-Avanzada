@@ -8,6 +8,8 @@ package ec.edu.espe.transport.services;
 import ec.edu.espe.transport.model.Carrier;
 import ec.edu.espe.transport.model.Guide;
 import ec.edu.espe.transport.model.GuideDAO;
+import ec.edu.espe.transport.model.GuideDetail;
+import ec.edu.espe.transport.model.Product;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
@@ -62,6 +64,7 @@ public class GuideResource {
         objGuide=guide.searchGuidebyId(id);
         return objGuide;
     }
+    
     @Path("/removeguide/{idguide}")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
@@ -72,6 +75,7 @@ public class GuideResource {
         listGuide=guide.showAllGuides();
         return listGuide;
     }
+    
     @Path("/updateguide/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,6 +93,13 @@ public class GuideResource {
         GuideDAO guide = new GuideDAO();
        return guide.addGuide(objGuide);
     } 
+    @Path("/calculatetotal/addguidedetail")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public GuideDetail addGuide(GuideDetail objGuide) throws SQLException{
+        GuideDAO guide = new GuideDAO();
+       return guide.addGuideDetail(objGuide);
+    }
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(Guide content) {
