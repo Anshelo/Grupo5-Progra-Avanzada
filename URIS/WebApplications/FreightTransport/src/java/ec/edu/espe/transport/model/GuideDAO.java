@@ -23,9 +23,48 @@ public class GuideDAO {
     public GuideDAO() {
         con = new DBConnect();
     }
-
+public Double calculateTotalGuide(String guideId) throws SQLException {
+        DBConnect connect = new DBConnect();
+        String query;
+        double totalguide=0.0;
+        query = "SELECT * from detalleguia WHERE idguia='" + guideId + "'";
+        PreparedStatement state = connect.connect().prepareStatement(query);
+        ResultSet rs = state.executeQuery();
+        GuideDetail guide = null;
+        GuideDetail tempGuide;
+        ArrayList<GuideDetail> guided = new ArrayList();
+        while (rs.next()) {
+            tempGuide = new GuideDetail(rs.getString("idguia"), rs.getString("codproducto"), rs.getInt("cantidad"), rs.getDouble("total"));
+            guided.add(tempGuide);
+            totalguide+=rs.getDouble("total");
+        }
+        return totalguide;
+    }
+public int calculateQuantityGuide(String guideId) throws SQLException {
+        DBConnect connect = new DBConnect();
+        String query;
+        int quantityguide=0;
+        query = "SELECT * from detalleguia WHERE idguia='" + guideId + "'";
+        PreparedStatement state = connect.connect().prepareStatement(query);
+        ResultSet rs = state.executeQuery();
+        GuideDetail guide = null;
+        GuideDetail tempGuide;
+        ArrayList<GuideDetail> guided = new ArrayList();
+        while (rs.next()) {
+            tempGuide = new GuideDetail(rs.getString("idguia"), rs.getString("codproducto"), rs.getInt("cantidad"), rs.getDouble("total"));
+            guided.add(tempGuide);
+            quantityguide+=rs.getInt("cantidad");
+        }
+        return quantityguide;
+    }
     public Guide addGuide(Guide objGuide) throws SQLException {
         Connection acceso = con.connect();
+        double totalguide;
+        int quantityguide;
+        totalguide=calculateTotalGuide(objGuide.getGuideId());
+        quantityguide=calculateQuantityGuide(objGuide.getGuideId());
+        objGuide.setTotal(totalguide);
+        objGuide.setQuantity(quantityguide);
         String sql = "INSERT INTO guia"
                 + " (idguia,fechaenvio,fecha_entrega,cantidad,total,ci_cliente,ci_transportista,cod_zona) values (?,?,?,?,?,?,?,?)";
         try {
@@ -120,7 +159,7 @@ public class GuideDAO {
         }
         return guide;
     }
-
+    
     public void deleteGuide(String guideId) {
         Connection acceso = con.connect();
         String sql = "DELETE FROM guia WHERE idguia='" + guideId + "'";
