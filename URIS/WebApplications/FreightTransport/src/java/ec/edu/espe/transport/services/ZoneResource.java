@@ -61,60 +61,35 @@ public class ZoneResource {
 
     @DELETE
     @Path("/deleteZone/{codigozona}")
-    public void deleteZone(@PathParam("codigozona") String codigozona){
+    public void deleteZone(@PathParam("codigozona") String codigozona) {
         ZoneDAO zdao = new ZoneDAO();
         zdao.borrarZona(codigozona);
     }
 
-    @Path("searchProduct/{id}")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Product getCarrierTruck(@PathParam("id") String id) {
-        ProductDAO searchedProduct = new ProductDAO();
-        return searchedProduct.searchproductByCi(id);
+    @Path("zones")
+    public ArrayList<Zone> getZones() {
+        ZoneDAO zdao = new ZoneDAO();
+        ArrayList<Zone> listaZ = new ArrayList<Zone>();
+        listaZ = zdao.mostrarZonas();
+        return listaZ;
     }
 
     @PUT
-    @Path("/modify/product")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public ArrayList<Product> modifyProduct(Product data) {
-        ProductDAO response = new ProductDAO();
-        response.modificarProductoIdentificacion(data);
-        /*      System.out.println(data.getCodigo());
-        System.out.println(data.getNombre());
-        System.out.println(data.getDescripcion());
-        System.out.println(data.getPeso());
-        System.out.println(data.getSensibilidad());
-        System.out.println(data.getValorU());
-         */ ProductDAO prod = new ProductDAO();
-
-        ArrayList<Product> producto = new ArrayList<Product>();
-        producto = prod.mostrarProductoCodigo(data.getProductCode());
-        return producto;
+    @Path("/modify/zone")
+    public ArrayList<Zone> modificarZona(Zone date) {
+        ZoneDAO zdao = new ZoneDAO();
+        zdao.modificarZonas(date);
+        ZoneDAO dao = new ZoneDAO();
+        ArrayList<Zone> listaZ = new ArrayList<Zone>();
+        listaZ = dao.mostrarZonaCodigo(date.getCodigozona());
+        return listaZ;
 
     }
 
-    @DELETE
-    @Path("/deleteProduct/{code}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteClient(@PathParam("code") String code) throws SQLException {
-        ProductDAO deletedProduct = new ProductDAO();
-        deletedProduct.eliminarProductoIdentificacion(code);
-    }
-
-    @Path("getproducts")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Product> getProduct() {
-        ProductDAO productList = new ProductDAO();
-        ArrayList<Product> productVO = new ArrayList<Product>();
-        productVO = productList.printProducto();
-        return productVO;
-    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(Product content) {
+    public void putJson(Zone content) {
     }
 }

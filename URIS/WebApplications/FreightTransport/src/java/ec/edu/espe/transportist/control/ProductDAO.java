@@ -5,7 +5,6 @@
  */
 package ec.edu.espe.transportist.control;
 
-
 import ec.edu.espe.transport.model.DBConnect;
 import ec.edu.espe.transport.model.Product;
 import java.sql.Connection;
@@ -19,14 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author Diego
  */
-
 public class ProductDAO {
+
     DBConnect con;
 
     public ProductDAO() {
-        con=new DBConnect();
+        con = new DBConnect();
     }
-    
+
     public Product searchproductByCi(String id) {
         Product product = new Product();
         Connection acceso = con.connect();
@@ -51,15 +50,15 @@ public class ProductDAO {
         return product;
     }
 
-    public ArrayList<Product> mostrarProducto(float peso){
-        ArrayList <Product> listaB=new ArrayList <Product>();
+    public ArrayList<Product> mostrarProducto(float peso) {
+        ArrayList<Product> listaB = new ArrayList<Product>();
         Product Producto;
-        try{
+        try {
             Connection acceso = con.connect();
-            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM producto WHERE peso='"+peso+"'");
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
-                Producto=new Product();
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM producto WHERE peso='" + peso + "'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto = new Product();
                 Producto.setProductCode(rs.getString(1));
                 Producto.setProductName(rs.getString(2));
                 Producto.setDescription(rs.getString(3));
@@ -68,56 +67,54 @@ public class ProductDAO {
                 Producto.setUnitValue(rs.getDouble(6));
                 listaB.add(Producto);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
         return listaB;
     }
-    
-    public ArrayList<Product> printProducto(){
-        ArrayList <Product> listaB=new ArrayList <Product>();
-        Product Producto;
-        try{
-            Connection acceso = con.connect();
-            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM producto ");
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
-                Producto=new Product();
-                Producto.setProductCode(rs.getString(1));
-                Producto.setProductName(rs.getString(2));
-                Producto.setDescription(rs.getString(3));
-                Producto.setWeight(rs.getDouble(4));
-                Producto.setSensibility(rs.getString(5));
-                Producto.setUnitValue(rs.getDouble(6));
-                listaB.add(Producto);
-            }
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return listaB;
-    }
- 
 
- 
-    public void eliminarProductoIdentificacion(String cod){
+    public ArrayList<Product> printProducto() {
+        ArrayList<Product> listaB = new ArrayList<Product>();
+        Product Producto;
+        try {
+            Connection acceso = con.connect();
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM producto ");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto = new Product();
+                Producto.setProductCode(rs.getString(1));
+                Producto.setProductName(rs.getString(2));
+                Producto.setDescription(rs.getString(3));
+                Producto.setWeight(rs.getDouble(4));
+                Producto.setSensibility(rs.getString(5));
+                Producto.setUnitValue(rs.getDouble(6));
+                listaB.add(Producto);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return listaB;
+    }
+
+    public void eliminarProductoIdentificacion(String cod) {
         try {
             Connection accesoDB = con.connect();
-            PreparedStatement ps= accesoDB.prepareStatement("DELETE FROM producto where codigoprod='"+cod+"'");
+            PreparedStatement ps = accesoDB.prepareStatement("DELETE FROM producto where codigoprod='" + cod + "'");
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
-        public ArrayList<Product> mostrarProductoCodigo(String cod){
-        ArrayList <Product> listaB=new ArrayList <Product>();
+
+    public ArrayList<Product> mostrarProductoCodigo(String cod) {
+        ArrayList<Product> listaB = new ArrayList<Product>();
         Product Producto;
-        try{
+        try {
             Connection acceso = con.connect();
-            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM producto WHERE codigoprod='"+cod+"'");
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
-                Producto=new Product();
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM producto WHERE codigoprod='" + cod + "'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto = new Product();
                 Producto.setProductCode(rs.getString(1));
                 Producto.setProductName(rs.getString(2));
                 Producto.setDescription(rs.getString(3));
@@ -126,21 +123,20 @@ public class ProductDAO {
                 Producto.setUnitValue(rs.getDouble(6));
                 listaB.add(Producto);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
         return listaB;
     }
-        
-        
-           public void modificarProductoIdentificacion(Product pro){
-        try{
+
+    public void modificarProductoIdentificacion(Product pro) {
+        try {
             Connection acceso = con.connect();
-            PreparedStatement ps= acceso.prepareStatement("UPDATE producto SET nombreprod='" +pro.getProductName()+"', descripcion='"+pro.getDescription()
-                    +"', peso='"+pro.getWeight()+"', sensibilidad='"+pro.getSensibility()+"', valorunit='"+pro.getUnitValue()
-                    +"'WHERE codigoprod='"+pro.getProductCode()+"'" );
+            PreparedStatement ps = acceso.prepareStatement("UPDATE producto SET nombreprod='" + pro.getProductName() + "', descripcion='" + pro.getDescription()
+                    + "', peso='" + pro.getWeight() + "', sensibilidad='" + pro.getSensibility() + "', valorunit='" + pro.getUnitValue()
+                    + "'WHERE codigoprod='" + pro.getProductCode() + "'");
             ps.executeUpdate();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
@@ -156,13 +152,11 @@ public class ProductDAO {
             ps.setDouble(4, prod.getWeight());
             ps.setString(5, prod.getSensibility());
             ps.setDouble(6, prod.getUnitValue());
-            
+
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
 
-
-    
 }

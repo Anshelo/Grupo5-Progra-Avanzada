@@ -58,10 +58,41 @@ public class ZoneDAO {
     public void borrarZona(String codigozona) {
         try {
             Connection acceso = con.connect();
-            PreparedStatement ps = acceso.prepareStatement("DELETE FROM zona where codigozona='" +codigozona+ "'");
+            PreparedStatement ps = acceso.prepareStatement("DELETE FROM zona where codigozona='" + codigozona + "'");
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    public ArrayList<Zone> mostrarZonas() {
+        ArrayList<Zone> listaZ = new ArrayList<Zone>();
+        Zone zone;
+        try {
+            Connection acceso = con.connect();
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM zona ");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                zone = new Zone();
+                zone.setCodigozona(rs.getString(1));
+                zone.setNombrezona(rs.getString(2));
+                listaZ.add(zone);
+            }
+        } catch (SQLException ex) {
+            System.out.println("error" + ex);
+        }
+        return listaZ;
+    }
+
+    public void modificarZonas(Zone zn) {
+        try {
+            Connection acceso = con.connect();
+            PreparedStatement ps = acceso.prepareStatement("UPDATE zona SET nombrezona='" + zn.getNombrezona() + "'"
+                    + "WHERE codigozona='" + zn.getCodigozona() + "'");
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("error" + e);
         }
     }
 }
