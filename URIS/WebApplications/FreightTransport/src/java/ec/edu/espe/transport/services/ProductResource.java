@@ -7,6 +7,7 @@ package ec.edu.espe.transport.services;
 
 import ec.edu.espe.transport.model.Carrier;
 import ec.edu.espe.transport.model.CarrierDAO;
+import ec.edu.espe.transport.model.Client;
 import ec.edu.espe.transport.model.DBConnect;
 import ec.edu.espe.transport.model.Product;
 import ec.edu.espe.transportist.control.ClientDAO;
@@ -109,6 +110,14 @@ public class ProductResource {
         producto=prod.mostrarProductoCodigo(data.getProductCode());
         return producto;
 
+    }
+    
+    @PUT
+    @Path("/updateproduct/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateProduct(Product data) {
+        ProductDAO updatedproduct = new ProductDAO();
+        updatedproduct.modificarProductoIdentificacion(data);
     }
     
     @POST
