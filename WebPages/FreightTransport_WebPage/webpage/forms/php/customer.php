@@ -25,7 +25,14 @@ if ($opcion =='Registrar'):
 
     $respone = curl_exec($cli);
     
-    
+    if($respone == false){    
+        echo"<center> <h1>Cliente Si Registrado</h1></center>";
+       echo $nameCustomer;
+    }else{
+        echo"<center> <h1>Cliente No Registrado</h1></center>";
+        echo $idCustomer;
+        
+    }
     
     curl_close($cli);
     
