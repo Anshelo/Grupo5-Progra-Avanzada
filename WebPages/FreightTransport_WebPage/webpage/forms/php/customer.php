@@ -36,49 +36,25 @@ if ($opcion =='Registrar'):
     
     curl_close($cli);
     
-    elseif ($opcion == 'Ver registros'):
-        echo " <center><h1>SHOW GUIDES</h1></center>";
-        $data = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/guide/showallguides"),true);
-        ?>
-        <center><table border="1" >
-                <tr>
-                    <td>idguide</td>
-                    <td>datesent</td>
-                    <td>datereceive</td>
-                    <td>quantityguide</td>
-                    <td>totalguide</td>
-                    <td>idcustomer</td>	
-                    <td>idcarrier</td>
-                    <td>codezone</td>		
-                </tr>
-
-                <?php 
-                foreach ($data as $d){
-                ?>
-                <tr>
-                    <td><?php echo $d['guideId'] ?></td>
-                    <td><?php echo $d['sendDate'] ?></td>
-                    <td><?php echo $d['deliverDate'] ?></td>
-                    <td><?php echo $d['quantity']?></td>
-                    <td><?php echo $d['total']?></td>
-                    <td><?php echo $d['customerId'] ?></td>
-                    <td><?php echo $d['carrierCard']?></td>
-                    <td><?php echo $d['zoneCode']?></td>
-                </tr>
-                <?php 
-                }
-                ?>
-                </table>
-                        
-            </center>
-            <?php 
-            elseif ($opcion == 'Buscar'):
+      elseif ($opcion == 'Buscar'):
                 $id = $_POST['idcustomer'];
                 echo " <center><h1>Cliente</h1></center>";
                 // $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
                 $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/client/searchClient/$id"),true);
                 ?>
-                <center><table border="1" >
+				
+				 <html lang="en">
+        <head>
+        <link rel="stylesheet" href="../css/styles.css">
+            <title>Cliente</title>
+        </head>
+        <body>
+        <body class="col-sm-8 main-section mx-auto">
+            <br>
+        <div class="styletittle">
+                                        Datos del cliente
+                                    </div><br>
+                <center><table class="table" border="1"  >
                         <tr>
                             <td>ci</td>
                             <td>ruc</td>
@@ -98,6 +74,9 @@ if ($opcion =='Registrar'):
                             <td><?php echo $dataId['mobileClient'] ?></td>
                             <td><?php echo $dataId['emailClient']?></td>
                         </tr>
+						
+						</body>
+        </html>
                         <?php 
                         
                         ?>
@@ -115,7 +94,7 @@ if ($opcion =='Registrar'):
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
             curl_close($ch);
-            echo"<center> <h2>CUSTOMER DELETE</h2></center>";   
+            echo"<center> <h2>Cliente eliminado</h2></center>";   
          elseif ($opcion == 'Modificar'):  
             $idCustomer = $_POST['idcustomer'];
             $nameCustomer = $_POST['namecustomer'];
@@ -144,11 +123,11 @@ if ($opcion =='Registrar'):
             
             $ch  = curl_exec($ch);
             if($ch == false){    
-                echo"<center> <h1>Cliente Si Registrado</h1></center>";
+                echo"<center> <h1>Cliente Modificado</h1></center>";
                 echo $data_json;
             }else{
-                echo"<center> <h1>Cliente No Registrado</h1></center>";
-                echo $ch;
+                echo"<center> <h1>Cliente No Modificado</h1></center>";
+                
             }
             curl_close($ch);
              
