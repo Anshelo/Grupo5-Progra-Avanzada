@@ -75,7 +75,7 @@ if ($opcion =='Registrar'):
                 $id = $_POST['weightproduct'];
                 echo " <center><h1>Producto</h1></center>";
                 // $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
-                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/product/$weight"),true);
+                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/product/updateproduct/$id"),true);
                 ?>
                 <center><table border="1" >
                         <tr>
