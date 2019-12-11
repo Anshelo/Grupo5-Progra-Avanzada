@@ -30,6 +30,8 @@ import javax.ws.rs.core.UriInfo;
  * @author Mateo
  */
 @Path("zone")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ZoneResource {
 
     @Context
@@ -41,43 +43,27 @@ public class ZoneResource {
     public ZoneResource() {
     }
 
-    @POST
-    @Path("/calculateproductprice/inserit")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Object addProduct(Product objProduct) throws SQLException {
-        DBConnect connect = new DBConnect();
-        double valueProduct, priceKg = 2, priceFragile = 4.50;
-        String query;
-        PreparedStatement state;
-        String sensibility;
-        sensibility = objProduct.getSensibility().toLowerCase();
-        if (sensibility.equals("fragil")) {
-            valueProduct = (objProduct.getWeight() * priceKg) + priceFragile;
-        } else {
-            valueProduct = objProduct.getWeight() * priceKg;
-        }
-        query = "INSERT INTO producto" + " (codigoprod,nombreprod,descripcion,peso,sensibilidad,valorunit) values (?,?,?,?,?,?)";
-        state = connect.connect().prepareStatement(query);
-        state.setString(1, objProduct.getProductCode());
-        state.setString(2, objProduct.getProductName());
-        state.setString(3, objProduct.getDescription());
-        state.setDouble(4, objProduct.getWeight());
-        state.setString(5, objProduct.getSensibility());
-        state.setDouble(6, valueProduct);
-        state.executeUpdate();
-        Product product = new Product(objProduct.getProductCode(), objProduct.getProductName(), objProduct.getDescription(),
-                objProduct.getWeight(), objProduct.getSensibility(), valueProduct);
-        return product;
-    }
-
     @GET
     @Path("{zonecode}")
-    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Zone> getJsonZonaCodigo(@PathParam("zonecode") String codigozona) {
         ZoneDAO zdao = new ZoneDAO();
         ArrayList<Zone> zone = new ArrayList<Zone>();
         zone = zdao.mostrarZonaCodigo(codigozona);
         return zone;
+    }
+
+    @POST
+    @Path("insertzone")
+    public Zone insertZone(Zone zone) {
+        ZoneDAO zoneObj = new ZoneDAO();
+        return zoneObj.aniadirZona(zone);
+    }
+
+    @DELETE
+    @Path("/deleteZone/{codigozona}")
+    public void deleteZone(@PathParam("codigozona") String codigozona){
+        ZoneDAO zdao = new ZoneDAO();
+        zdao.borrarZona(codigozona);
     }
 
     @Path("searchProduct/{id}")
@@ -106,18 +92,6 @@ public class ZoneResource {
         producto = prod.mostrarProductoCodigo(data.getProductCode());
         return producto;
 
-    }
-
-    @POST
-    @Path("/createProduct")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void save(Product data) {
-        ProductDAO response = new ProductDAO();
-        response.adicionarProduct(data);
-        //    response.adicionarGuia(data);
-        //  System.out.println(data.getCodigo());
-        //    System.out.println(data.getNombre());
-        //  System.out.println(data.getCiudad());
     }
 
     @DELETE

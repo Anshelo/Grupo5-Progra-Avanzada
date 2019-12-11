@@ -8,7 +8,6 @@ package ec.edu.espe.transport.services;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-
 @javax.ws.rs.ApplicationPath("project")
 public class ApplicationConfig extends Application {
 
@@ -20,10 +19,9 @@ public class ApplicationConfig extends Application {
     }
 
     /**
-     * Do not modify addRestResourceClasses() method.
-     * It is automatically populated with
-     * all resources defined in the project.
-     * If required, comment out calling this method in getClasses().
+     * Do not modify addRestResourceClasses() method. It is automatically
+     * populated with all resources defined in the project. If required, comment
+     * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ec.edu.espe.transport.services.CarrierResource.class);
@@ -31,7 +29,7 @@ public class ApplicationConfig extends Application {
         resources.add(ec.edu.espe.transport.services.CustomerResource.class);
         resources.add(ec.edu.espe.transport.services.GuideResource.class);
         resources.add(ec.edu.espe.transport.services.ProductResource.class);
-         resources.add(ec.edu.espe.transport.services.ZoneResource.class);
+        resources.add(ec.edu.espe.transport.services.ZoneResource.class);
     }
-    
+
 }

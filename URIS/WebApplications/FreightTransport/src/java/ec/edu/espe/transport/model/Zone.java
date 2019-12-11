@@ -13,6 +13,13 @@ public class Zone {
 
     private String codigozona;
     private String nombrezona;
+        
+    /*
+    {
+    "codigozona":"6",
+    "nombrezona":"Ibarra"
+    }
+    */
 
     public Zone() {
     }
