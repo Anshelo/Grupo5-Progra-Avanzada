@@ -72,7 +72,7 @@ public class CarrierResource {
         }
         return age;
     }
-    @Path("insertcarrier")
+    @Path("addcarrier")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -124,13 +124,9 @@ public class CarrierResource {
     @DELETE
     @Path("deletecarrier/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ArrayList<Carrier> deleteCarrier(@PathParam("id")int id) {
+    public void deleteCarrier(@PathParam("id")int id) {
         CarrierDAO response = new CarrierDAO();
         response.deleteCarrier(id);
-        CarrierDAO carrier=new CarrierDAO();
-        ArrayList<Carrier> listCarrier=new ArrayList<Carrier>();
-        listCarrier=carrier.printCarrierById(id);
-        return listCarrier;
     }
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

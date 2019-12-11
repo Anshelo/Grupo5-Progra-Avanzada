@@ -170,12 +170,11 @@ public class CarrierDAO {
         }
     }
     public void deleteCarrier(int id){
-        Connection accesoDB = con.connect();
-        String sql = "DELETE FROM transportista WHERE codigotransp="+id;
         int res = 0;
         try{
             //preparar la ejecucion
-            PreparedStatement ps = accesoDB.prepareStatement(sql);
+            Connection accesoDB = con.connect();
+            PreparedStatement ps = accesoDB.prepareStatement("DELETE FROM transportista WHERE codigotransp='"+id+ "'");
             res = ps.executeUpdate();
             if (res>0){
                 JOptionPane.showMessageDialog(null,"Registro eliminado.....");
@@ -185,14 +184,6 @@ public class CarrierDAO {
             System.out.println(e);
         }
     }
-    /* void deleteCarrier(int id){
-        try {
-            Connection accesoDB = con.connect();
-            PreparedStatement ps= accesoDB.prepareStatement("DELETE FROM transportista where codigotransp='"+id+"'");
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }*/
+ 
    
 }
