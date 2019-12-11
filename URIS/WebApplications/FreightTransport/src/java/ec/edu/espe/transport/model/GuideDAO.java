@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -45,6 +46,53 @@ public class GuideDAO {
         return guide;
     }
 
+    public Product GetUnitValue(String codigo) throws SQLException {
+        
+        DBConnect connect = new DBConnect();
+        String query;
+        query = "SELECT * from producto WHERE codigoprod='"+codigo+"'";
+        PreparedStatement state = connect.connect().prepareStatement(query);
+        ResultSet rs = state.executeQuery();
+        Product producto = null;
+        while (rs.next()) {
+        producto=new Product(rs.getString("codigoprod"),rs.getString("nombreprod"),
+        rs.getString("descripcion"),rs.getDouble("peso"),rs.getString("sensibilidad"),rs.getDouble("valorunit")); 
+        
+        }
+        return producto;
+                
+    }
+
+    public GuideDetail addGuideDetail(GuideDetail objGuide) throws SQLException {
+        Connection acceso = con.connect();
+        double totalproduct = 0.0;
+        String productcode;
+        Product objProduct= new Product();
+        objProduct= GetUnitValue(objGuide.getProductCode());
+  
+        String sql = "INSERT INTO detalleguia"
+                + " (idguia,codproducto,cantidad,total) values (?,?,?,?)";
+        
+        try {
+
+            PreparedStatement state = acceso.prepareStatement(sql);
+            state.setString(1, objGuide.getGuideId());
+            state.setString(2, objGuide.getProductCode());
+            state.setInt(3, objGuide.getQuantity());
+            totalproduct=objProduct.getUnitValue()*objGuide.getQuantity();
+            objGuide.setTotal(totalproduct);
+            state.setDouble(4, objGuide.getTotal());
+            state.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        GuideDetail guide = new GuideDetail(objGuide.getGuideId(), objGuide.getProductCode(),
+                objGuide.getQuantity(), objGuide.getTotal());
+        return guide;
+    }
+
     public ArrayList<Guide> showAllGuides() throws SQLException {
         DBConnect connect = new DBConnect();
         String query;
@@ -76,6 +124,17 @@ public class GuideDAO {
     public void deleteGuide(String guideId) {
         Connection acceso = con.connect();
         String sql = "DELETE FROM guia WHERE idguia='" + guideId + "'";
+        try {
+            PreparedStatement state = acceso.prepareStatement(sql);
+            state.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void deleteGuideDetail(String guideId) {
+        Connection acceso = con.connect();
+        String sql = "DELETE FROM detalleguia WHERE idguia='" + guideId + "'";
         try {
             PreparedStatement state = acceso.prepareStatement(sql);
             state.executeUpdate();
