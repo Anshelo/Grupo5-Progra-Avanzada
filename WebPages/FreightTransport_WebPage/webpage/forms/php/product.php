@@ -8,12 +8,12 @@ if ($opcion =='Registrar'):
     $nameProduct = $_POST['nameproduct'];
     $selectdescription = $_POST['selectDescription'];
     $weightProduct = $_POST['weightproduct'];
-    $selectSensibility = $_POST['selectsensibility'];
+    $selectSens = $_POST['selectsensibility'];
     $unityvalueproduct = $_POST['unityValueproduct'];
 
     $data =array('productCode' =>$idProduct,
                  'productName'=>$nameProduct,'description'=>$selectdescription,'weight'=>$weightProduct,
-                 'sensibility'=>$selectSensibility,'unitValue'=>$unityvalueproduct);    
+                 'sensibility'=>$selectSens,'unitValue'=>$unityvalueproduct);    
     
     $cli=curl_init($url);
     curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
@@ -26,10 +26,10 @@ if ($opcion =='Registrar'):
     
     if($respone == false){    
         echo"<center> <h1>Producto Registrado</h1></center>";
-       echo $nameCustomer;
+       echo $nameProduct;
     }else{
         echo"<center> <h1>Producto No Registrado</h1></center>";
-        echo $idCustomer;
+        echo $idProduct;
         
     }
     
@@ -118,7 +118,7 @@ if ($opcion =='Registrar'):
             $nameProduct = $_POST['nameproduct'];
             $selectdescription = $_POST['selectDescription'];
             $weightProduct = $_POST['weightproduct'];
-            $selectSensibility = $_POST['selectsensibility'];
+            $selectSens = $_POST['selectsensibility'];
             $unityvalueproduct = $_POST['unityValueproduct'];
             
             $url = "http://localhost:8080/FreightTransport/project/client/updateclient/$idCustomer";
@@ -128,7 +128,7 @@ if ($opcion =='Registrar'):
         
             $data =array('productCode' =>$idProduct,
 		                 'productName'=>$nameProduct,'description'=>$selectdescription,'weight'=>$weightProduct,
-		                 'sensibility'=>$selectSensibility,'unitValue'=>$unityvalueproduct);       
+		                 'sensibility'=>$selectSens,'unitValue'=>$unityvalueproduct);       
                    
             $data_json = json_encode($data);
             $ch = curl_init();
