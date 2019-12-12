@@ -26,10 +26,10 @@ if ($opcion =='Registrar'):
     
     if($respone == false){    
         echo"<center> <h1>Producto Registrado</h1></center>";
-       echo $nameCustomer;
+       echo $nameProduct;
     }else{
         echo"<center> <h1>Producto No Registrado</h1></center>";
-        echo $idCustomer;
+        echo $idProduct;
         
     }
     
