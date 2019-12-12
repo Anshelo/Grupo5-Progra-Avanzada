@@ -21,8 +21,6 @@ public class DBConnect {
   String user = "root";
    String pass = "";
    // String pass = "12345678";
-    
-
     public Connection connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");

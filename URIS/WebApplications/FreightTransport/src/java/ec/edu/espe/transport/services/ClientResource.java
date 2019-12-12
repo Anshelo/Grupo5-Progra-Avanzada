@@ -73,25 +73,32 @@ public class ClientResource {
             return newClient.addClient(client);
         }else{
             return new Client();
-        }
-        
-        
+        } 
     }
 
     @Path("searchClient/{ci}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Client getCarrierTruck(@PathParam("ci") String ci) {
+    public Client getClient(@PathParam("ci") String ci) {
         ClientDAO searchedClient = new ClientDAO();
         return searchedClient.searchClientByCi(ci);
+    }
+    
+    @Path("clients")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Client> getClients() {
+        ClientDAO searchedClients = new ClientDAO();
+        return searchedClients.showAllCustomers();
     }
 
     @PUT
     @Path("/updateclient/{ci}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateClient(Client data) {
+    public Client updateClient(Client data) {
         ClientDAO updatedClient = new ClientDAO();
         updatedClient.updateClient(data);
+        return updatedClient.searchClientByCi(data.getCiClient());
     }
 
     @DELETE
