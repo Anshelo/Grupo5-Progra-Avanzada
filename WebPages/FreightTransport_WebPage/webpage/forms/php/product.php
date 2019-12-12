@@ -1,69 +1,61 @@
 <?php
 $opcion=$_POST['option'];
 if ($opcion =='Registrar'):
-    //$url = "http://localhost:1024//FreightTransport/project/client/addClient";
-    
     $url = "http://localhost:8080/FreightTransport/project/product/createProduct";
-    $idProduct = $_POST['idproduct'];
-    $nameProduct = $_POST['nameproduct'];
-    $selectdescription = $_POST['selectDescription'];
-    $weightProduct = $_POST['weightproduct'];
-    $selectSens = $_POST['selectsensibility'];
-    $unityvalueproduct = $_POST['unityValueproduct'];
-
-    $data =array('productCode' =>$idProduct,
-                 'productName'=>$nameProduct,'description'=>$selectdescription,'weight'=>$weightProduct,
-                 'sensibility'=>$selectSens,'unitValue'=>$unityvalueproduct);    
+    $codeprod = $_POST['idproduct'];
+    $nameprod = $_POST['nameproduct'];
+    $description = $_POST['selectDescription'];
+    $weight = $_POST['weightproduct'];
+    $sensibility = $_POST['selectSen'];
+    $unitvalue = $_POST['unityValueproduct'];
     
+    $data =array('productCode' =>$codeprod, 'productName'=>$nameprod, 'description'=>$description,'weight'=>$weight,'sensibility'=>$sensibility,
+    'unitValue'=>$unitvalue);    
     $cli=curl_init($url);
-    curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
-    //curl_setopt($cli, CURLOPT_URL,$url);
-    curl_setopt($cli, CURLOPT_POST,true);
     curl_setopt($cli, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_setopt($cli, CURLOPT_POST,true);
     curl_setopt($cli, CURLOPT_POSTFIELDS,json_encode($data));
-
+    curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
     $respone = curl_exec($cli);
-    
-    if($respone == false){    
-        echo"<center> <h1>Producto Registrado</h1></center>";
-       echo $nameProduct;
-    }else{
-        echo"<center> <h1>Producto No Registrado</h1></center>";
-        echo $idProduct;
-        
-    }
-    
     curl_close($cli);
-    
-    elseif ($opcion == 'Ver registros'):
-        echo " <center><h1>SHOW GUIDES</h1></center>";
-        $data = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/guide/showallguides"),true);
+    echo"<center> <h1>PRODUCT REGISTER</h1></center>";
+elseif ($opcion == 'Ver registros'):
+        $data = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/product/getproducts"),true);
         ?>
-        <center><table border="1" >
-                <tr>
-                    <td>idguide</td>
-                    <td>datesent</td>
-                    <td>datereceive</td>
-                    <td>quantityguide</td>
-                    <td>totalguide</td>
-                    <td>idcustomer</td>	
-                    <td>idcarrier</td>
-                    <td>codezone</td>		
+        <html lang="en">
+        <head>
+        <link rel="stylesheet" href="../css/styles.css">
+            <title>Product</title>
+        </head>
+        <body>
+        <body class="col-sm-8 main-section mx-auto">
+            <br>
+        <div class="styletittle">
+                                        Productos
+                                    </div><br>
+        <center><table class="table" border="1" >
+                <tr class="table-primary">
+                    <td>Codigo Producto</td>
+                    <td>Nombre Producto</td>
+                    <td>Descripcion</td>
+                    <td>Peso</td>
+                    <td>Sensibilidad</td>
+                    <td>Valor Unitario</td>              
+                    		
                 </tr>
-
                 <?php 
                 foreach ($data as $d){
                 ?>
                 <tr>
-                    <td><?php echo $d['guideId'] ?></td>
-                    <td><?php echo $d['sendDate'] ?></td>
-                    <td><?php echo $d['deliverDate'] ?></td>
-                    <td><?php echo $d['quantity']?></td>
-                    <td><?php echo $d['total']?></td>
-                    <td><?php echo $d['customerId'] ?></td>
-                    <td><?php echo $d['carrierCard']?></td>
-                    <td><?php echo $d['zoneCode']?></td>
+                            <td><?php echo $d['productCode'] ?></td>
+                            <td><?php echo $d['productName'] ?></td>
+                            <td><?php echo $d['description'] ?></td>
+                            <td><?php echo $d['weight']?></td>
+                            <td><?php echo $d['sensibility'] ?></td>
+                            <td><?php echo $d['unitValue']?></td>
                 </tr>
+        </body>
+        </html>
                 <?php 
                 }
                 ?>
@@ -72,19 +64,28 @@ if ($opcion =='Registrar'):
             </center>
             <?php 
             elseif ($opcion == 'Buscar'):
-                $id = $_POST['weightproduct'];
-                echo " <center><h1>Producto</h1></center>";
-                // $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
-                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/product/updateproduct/$id"),true);
+                $id = $_POST['idproduct'];
+                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/product/searchProduct/$id"),true);
                 ?>
-                <center><table border="1" >
-                        <tr>
-                            <td>codigoprod</td>
-                            <td>nombreprod</td>
-                            <td>descripcion</td>
-                            <td>peso</td>
-                            <td>sensibilidad</td>
-                            <td>valorunit</td>	
+                <html lang="en">
+        <head>
+        <link rel="stylesheet" href="../css/styles.css">
+            <title>Guides</title>
+        </head>
+        <body>
+        <body class="col-sm-8 main-section mx-auto">
+            <br>
+        <div class="styletittle">
+                                        Productos
+                                    </div><br>
+        <center><table class="table" border="1" >
+                <tr class="table-primary">
+                    <td>Codigo Producto</td>
+                    <td>Nombre Producto</td>
+                    <td>Descripcion</td>
+                    <td>Peso</td>
+                    <td>Sensibilidad</td>
+                    <td>Valor Unitario</td>
                         </tr>
         
                         <tr>
@@ -92,9 +93,15 @@ if ($opcion =='Registrar'):
                             <td><?php echo $dataId['productName'] ?></td>
                             <td><?php echo $dataId['description'] ?></td>
                             <td><?php echo $dataId['weight']?></td>
-                            <td><?php echo $dataId['sensibility']?></td>
-                            <td><?php echo $dataId['unitValue'] ?></td>
+                            <td><?php echo $dataId['sensibility'] ?></td>
+                            <td><?php echo $dataId['unitValue']?></td>
+                            
+                            
+                            
                         </tr>
+        </body>
+        </html>
+        
                         <?php 
                         
                         ?>
@@ -103,33 +110,26 @@ if ($opcion =='Registrar'):
                     </center>
                     <?php 
         elseif ($opcion == 'Eliminar'):
-            $idC = $_POST['idcustomer'];
-			//$url = "http://localhost:1024/FreightTransport/project/client/deleteClient/$idC";
-            $url = "http://localhost:8080/FreightTransport/project/client/deleteClient/$idC";           
+            $idG = $_POST['idproduct'];
+            $url = "http://localhost:8080/FreightTransport/project/product/deleteProduct/$idG";           
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
             curl_close($ch);
-            echo"<center> <h2>CUSTOMER DELETE</h2></center>";   
+            echo"<center> <h2>PRODUCT DELETE</h2></center>";   
          elseif ($opcion == 'Modificar'):  
-            $idProduct = $_POST['idproduct'];
-            $nameProduct = $_POST['nameproduct'];
-            $selectdescription = $_POST['selectDescription'];
-            $weightProduct = $_POST['weightproduct'];
-            $selectSens = $_POST['selectsensibility'];
-            $unityvalueproduct = $_POST['unityValueproduct'];
             
-            $url = "http://localhost:8080/FreightTransport/project/client/updateclient/$idCustomer";
-         // $url = "http://localhost:1024/FreightTransport/project/client/updateclient/$idCustomer";  
-
-            
-        
-            $data =array('productCode' =>$idProduct,
-		                 'productName'=>$nameProduct,'description'=>$selectdescription,'weight'=>$weightProduct,
-		                 'sensibility'=>$selectSens,'unitValue'=>$unityvalueproduct);       
-                   
+            $codeprod = $_POST['idproduct'];
+            $nameprod = $_POST['nameproduct'];
+            $description = $_POST['selectDescription'];
+            $weight = $_POST['weightproduct'];
+            $sensibility = $_POST['selectSen'];
+            $unitvalue = $_POST['unityValueproduct'];      
+            $url = "http://localhost:8080/FreightTransport/project/product/updateproduct/$codeprod";         
+            $data =array('productName'=>strval($nameprod), 'description'=>$description,'weight'=>$weight,'sensibility'=>$sensibility,
+                        'unitValue'=>$unitvalue);  
             $data_json = json_encode($data);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -137,16 +137,9 @@ if ($opcion =='Registrar'):
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
             curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            
-            $ch  = curl_exec($ch);
-            if($ch == false){    
-                echo"<center> <h1>Producto Registrado</h1></center>";
-                echo $data_json;
-            }else{
-                echo"<center> <h1>Producto No Registrado</h1></center>";
-                echo $ch;
-            }
+            $response  = curl_exec($ch);
             curl_close($ch);
-             
-    endif;
- ?>
+            echo"<center> <h2>PRODUCT MODIFY</h2></center>"; 
+            echo $data_json; 
+       endif;
+		 ?>
