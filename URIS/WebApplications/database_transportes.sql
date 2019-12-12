@@ -18,7 +18,6 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for cliente
 -- ----------------------------
-DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
   `ci` varchar(10) NOT NULL,
   `ruc` varchar(15) DEFAULT NULL,
@@ -43,7 +42,6 @@ INSERT INTO `cliente` VALUES ('1726416173', '1726416173001', 'Dennise Sandoval',
 -- ----------------------------
 -- Table structure for detalleguia
 -- ----------------------------
-DROP TABLE IF EXISTS `detalleguia`;
 CREATE TABLE `detalleguia` (
   `idguia` varchar(10) DEFAULT NULL,
   `codproducto` varchar(10) DEFAULT NULL,
@@ -80,7 +78,6 @@ INSERT INTO `detalleguia` VALUES ('7', '04', '1', '20.5');
 -- ----------------------------
 -- Table structure for guia
 -- ----------------------------
-DROP TABLE IF EXISTS `guia`;
 CREATE TABLE `guia` (
   `idguia` varchar(8) NOT NULL,
   `fechaenvio` date NOT NULL,
@@ -113,7 +110,6 @@ INSERT INTO `guia` VALUES ('7', '1997-10-30', '1997-10-30', '11', '465.5', '1714
 -- ----------------------------
 -- Table structure for producto
 -- ----------------------------
-DROP TABLE IF EXISTS `producto`;
 CREATE TABLE `producto` (
   `codigoprod` varchar(8) NOT NULL DEFAULT '',
   `nombreprod` varchar(52) NOT NULL,
@@ -140,7 +136,6 @@ INSERT INTO `producto` VALUES ('11', 'Mesa', 'Pesado', '45', 'No Fragil', '90');
 -- ----------------------------
 -- Table structure for products
 -- ----------------------------
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `code` varchar(10) NOT NULL,
   `name` varchar(32) DEFAULT NULL,
@@ -170,7 +165,6 @@ INSERT INTO `products` VALUES ('06', 'mueble grande', '2', '3.5');
 -- ----------------------------
 -- Table structure for transportista
 -- ----------------------------
-DROP TABLE IF EXISTS `transportista`;
 CREATE TABLE `transportista` (
   `codigotransp` int(10) NOT NULL,
   `ci` varchar(10) NOT NULL,
@@ -197,7 +191,6 @@ INSERT INTO `transportista` VALUES ('3', '1754565455', '1994-04-06', 'Carlos Sal
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) NOT NULL,
@@ -212,7 +205,6 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Table structure for zona
 -- ----------------------------
-DROP TABLE IF EXISTS `zona`;
 CREATE TABLE `zona` (
   `codigozona` varchar(8) NOT NULL DEFAULT '',
   `nombrezona` varchar(52) NOT NULL,

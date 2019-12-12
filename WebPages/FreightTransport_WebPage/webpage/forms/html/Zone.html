@@ -1,15 +1,15 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/validations.js"></script>
-    <title>Formulario zona</title>
+    <script src="../php/json.php"></script>
+    <title>Formulario Zona</title>
 </head>
 
 <body>
-    <form name="zone" method="post" action="../php/zone.php>
-        <div class="modal-body text-center">
+    <div class="modal-body text-center">
+        <form name="Product" method="post" action="../php/zone.php">
             <div class="col-sm-8 main-section mx-auto">
                 <div class="modal-content">
                     <div class="col-33 ">
@@ -17,9 +17,8 @@
                             <table class="table">
 
                                 <head>
-
                                     <div class="styletittle">
-                                        Zona De Transporte
+                                        Zonas
                                     </div>
                                 </head>
                                 <tbody>
@@ -27,13 +26,11 @@
                                     <tr>
                                         <br>
                                         <IMG SRC="../images/zone.png" width="200"><br><br><br>
-                                        <center></center>
                                         <div class="form-group">
                                             <td>
-                                                <div class="label">Codigo Zona: </div>
+                                                <div class="label">Codigo Zonal: </div>
                                             </td>
-                                            <td><input type="number" class="form-control" name="codigozona" placeholder="1" autofocus min="1" onkeypress="return tecla()" onsubmit="return verificaUser();" onpaste="return false" onfocus="return false" autofocus
-                                                    required></td>
+                                            <td><input type="text" class="form-control" name="codigozona" id="codigozona" placeholder="1" onkeypress="return validatenumbers(event)" onpaste="return false"></td>
 
                                         </div>
                                     </tr>
@@ -42,7 +39,8 @@
                                             <td>
                                                 <div class="label">Nombre de la Zona: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="nombrezona" placeholder="Quito" onkeypress="return soloLetras(event)" onsubmit="return verificaUser();" onpaste="return false" onfocus="return false" required></td>
+                                            <td><input type="text" class="form-control" name="nombrezona" placeholder="Quito" onkeypress="return soloLetras(event)" onsubmit="return verificaUser();" onpaste="return false" onfocus="return false"></td>
+
                                         </div>
                                     </tr>
                                 </tbody>
@@ -64,20 +62,28 @@
                                             <td>
                                                 <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary btn-block center " name="option" value="Buscar">
                                             </td>
-
+                                            <td>
+                                                <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary btn-block center " name="option" value="Ver registros">
+                                            </td>
                                         </div>
+                                        <td>
+                                            <center>
+                                                <a href="home.html">Men&uacute Principal</a>
+                                            </center>
+
+                                        </td>
+
                                     </tr>
                                 </body>
                             </table>
-
-
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+    </div>
     </form>
+    </div>
+
 </body>
 
 </html>
