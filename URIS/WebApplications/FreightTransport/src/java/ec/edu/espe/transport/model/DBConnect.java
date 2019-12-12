@@ -14,13 +14,15 @@ import java.sql.SQLException;
  * @author Dennise
  */
 public class DBConnect {
+
     Connection ct;
     String bd = "database_transportes";
-    String url = "jdbc:mysql://localhost/" + bd;
-  //String url = "jdbc:mysql://dbinstance.cndtjrwnep9m.us-east-1.rds.amazonaws.com/" + bd;
-  String user = "root";
-   String pass = "";
-   // String pass = "12345678";
+    //String url = "jdbc:mysql://localhost/" + bd;
+    String url = "jdbc:mysql://dbinstance.cndtjrwnep9m.us-east-1.rds.amazonaws.com/" + bd;
+    String user = "root";
+    //String pass = "";
+    String pass = "12345678";
+
     public Connection connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -47,6 +49,6 @@ public class DBConnect {
     public static void main(String[] args) throws SQLException {
         DBConnect c = new DBConnect();
         c.connect();
-        
+
     }
 }
