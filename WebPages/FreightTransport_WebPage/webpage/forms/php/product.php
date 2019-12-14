@@ -18,7 +18,8 @@ if ($opcion =='Registrar'):
     curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
     $respone = curl_exec($cli);
     curl_close($cli);
-    echo"<center> <h1>PRODUCT REGISTER</h1></center>";
+    echo"<center> <h1>PRODUCTO REGISTRADO</h1></center>";
+
 elseif ($opcion == 'Ver registros'):
         $data = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/product/getproducts"),true);
         ?>
@@ -41,7 +42,7 @@ elseif ($opcion == 'Ver registros'):
                     <td>Peso</td>
                     <td>Sensibilidad</td>
                     <td>Valor Unitario</td>              
-                    		
+                            
                 </tr>
                 <?php 
                 foreach ($data as $d){
@@ -118,7 +119,7 @@ elseif ($opcion == 'Ver registros'):
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
             curl_close($ch);
-            echo"<center> <h2>PRODUCT DELETE</h2></center>";   
+            echo"<center> <h2>PRODUCTO ELIMINADO</h2></center>";   
          elseif ($opcion == 'Modificar'):  
             
             $codeprod = $_POST['idproduct'];
@@ -126,10 +127,14 @@ elseif ($opcion == 'Ver registros'):
             $description = $_POST['selectDescription'];
             $weight = $_POST['weightproduct'];
             $sensibility = $_POST['selectSen'];
-            $unitvalue = $_POST['unityValueproduct'];      
-            $url = "http://localhost:8080/FreightTransport/project/product/updateproduct/$codeprod";         
-            $data =array('productName'=>strval($nameprod), 'description'=>$description,'weight'=>$weight,'sensibility'=>$sensibility,
-                        'unitValue'=>$unitvalue);  
+            $unitvalue = $_POST['unityValueproduct'];
+
+            $url = "http://localhost:8080/FreightTransport/project/product/updateproduct/$codeprod";
+
+            $data =array('productCode' =>$codeprod, 'productName'=>strval($nameprod), 'description'=>$description,'weight'=>$weight,'sensibility'=>$sensibility,
+            'unitValue'=>$unitvalue); 
+                
+                   
             $data_json = json_encode($data);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -139,7 +144,7 @@ elseif ($opcion == 'Ver registros'):
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
             curl_close($ch);
-            echo"<center> <h2>PRODUCT MODIFY</h2></center>"; 
-            echo $data_json; 
+            echo"<center> <h2>PRODUCTO MODIFICADO</h2></center>"; 
+            echo $data_json;
        endif;
-		 ?>
+         ?>
