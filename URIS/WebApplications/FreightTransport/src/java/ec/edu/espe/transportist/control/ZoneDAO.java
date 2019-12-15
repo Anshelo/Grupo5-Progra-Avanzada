@@ -38,6 +38,27 @@ public class ZoneDAO {
         }
         return listaZ;
     }
+    
+        public Zone mostrarZonaC(String codigozona) {
+        Zone zone = new Zone();
+        Connection acceso = con.connect();
+        try {
+
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM zona WHERE codigozona='" + codigozona + "'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (codigozona.equals(rs.getString(1))) {
+                    zone = new Zone();
+                    zone.setCodigozona(rs.getString(1));
+                    zone.setNombrezona(rs.getString(2));
+                }
+
+            }
+        } catch (SQLException e) {
+            System.out.println("error" + e);
+        }
+        return zone;
+    }
 
     public Zone aniadirZona(Zone zone) {
         Connection acceso = con.connect();

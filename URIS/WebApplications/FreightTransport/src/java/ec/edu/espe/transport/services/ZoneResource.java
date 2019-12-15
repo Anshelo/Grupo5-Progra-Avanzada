@@ -38,14 +38,22 @@ public class ZoneResource {
     public ZoneResource() {
     }
 
-    @GET
-    @Path("{zonecode}")
-    public ArrayList<Zone> getJsonZonaCodigo(@PathParam("zonecode") String codigozona) {
+    /*@GET
+    @Path("/zone/{codigozona}")
+    public ArrayList<Zone> getJsonZonaCodigo(@PathParam("codigozona") String codigozona) {
         ZoneDAO zdao = new ZoneDAO();
         ArrayList<Zone> zone = new ArrayList<Zone>();
         zone = zdao.mostrarZonaCodigo(codigozona);
         return zone;
+    }*/
+    @Path("zone/{codigozona}")
+    @GET
+    public Zone getZone(@PathParam("codigozona")String codigozona){
+        ZoneDAO zdao = new ZoneDAO();
+        return zdao.mostrarZonaC(codigozona);
+        
     }
+    
 
     @POST
     @Path("insertzone")
@@ -64,7 +72,7 @@ public class ZoneResource {
     }
 
     @PUT
-    @Path("/modify/zone")
+    @Path("/modify/{codigozona}")
     public ArrayList<Zone> modificarZona(Zone date) {
         ZoneDAO zdao = new ZoneDAO();
         zdao.modificarZonas(date);
@@ -77,12 +85,9 @@ public class ZoneResource {
 
     @Path("/removezone/{codigozona}")
     @DELETE
-    public ArrayList<Zone> borrarZona(@PathParam("codigozona") String codigozona) {
+    public void borrarZona(@PathParam("codigozona") String codigozona){
         ZoneDAO zdao = new ZoneDAO();
         zdao.borrarZona(codigozona);
-        ArrayList<Zone> listaZ = new ArrayList<>();
-        listaZ = zdao.mostrarZonas();
-        return listaZ;
     }
 
     @PUT
