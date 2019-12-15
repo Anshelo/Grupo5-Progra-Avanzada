@@ -43,8 +43,8 @@ if ($opcion =='Registrar'):
     elseif ($opcion == 'Buscar'):
                 $id = $_POST['idcustomer'];
                 echo " <center><h1>Cliente</h1></center>";
-                // $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
-                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/client/searchClient/$id"),true);
+                 $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
+                //$dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/client/searchClient/$id"),true);
         if($dataId==null){
                 echo "<center> <h2>No se Encontraron datos</h2></center>";
         }else{
