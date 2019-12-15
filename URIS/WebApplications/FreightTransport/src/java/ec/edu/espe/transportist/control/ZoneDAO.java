@@ -56,9 +56,10 @@ public class ZoneDAO {
     }
 
     public void borrarZona(String codigozona) {
+        Connection acceso = con.connect();
+        String sql = "DELETE FROM zona where codigozona='" + codigozona + "'";
         try {
-            Connection acceso = con.connect();
-            PreparedStatement ps = acceso.prepareStatement("DELETE FROM zona where codigozona='" + codigozona + "'");
+            PreparedStatement ps = acceso.prepareStatement(sql);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

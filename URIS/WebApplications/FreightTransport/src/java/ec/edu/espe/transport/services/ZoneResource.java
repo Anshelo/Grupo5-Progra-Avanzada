@@ -5,13 +5,8 @@
  */
 package ec.edu.espe.transport.services;
 
-import ec.edu.espe.transport.model.DBConnect;
-import ec.edu.espe.transport.model.Product;
 import ec.edu.espe.transport.model.Zone;
 import ec.edu.espe.transportist.control.ZoneDAO;
-import ec.edu.espe.transportist.control.ProductDAO;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -59,13 +54,6 @@ public class ZoneResource {
         return zoneObj.aniadirZona(zone);
     }
 
-    @DELETE
-    @Path("/deleteZone/{codigozona}")
-    public void deleteZone(@PathParam("codigozona") String codigozona) {
-        ZoneDAO zdao = new ZoneDAO();
-        zdao.borrarZona(codigozona);
-    }
-
     @GET
     @Path("zones")
     public ArrayList<Zone> getZones() {
@@ -87,6 +75,15 @@ public class ZoneResource {
 
     }
 
+    @Path("/removezone/{codigozona}")
+    @DELETE
+    public ArrayList<Zone> borrarZona(@PathParam("codigozona") String codigozona) {
+        ZoneDAO zdao = new ZoneDAO();
+        zdao.borrarZona(codigozona);
+        ArrayList<Zone> listaZ = new ArrayList<>();
+        listaZ = zdao.mostrarZonas();
+        return listaZ;
+    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
