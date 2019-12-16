@@ -6,17 +6,18 @@ if ($opcion =='Registrar'):
     $url = "http://localhost:8080/FreightTransport/project/carrier/addcarrier";
     $idCarrier = $_POST['idcarrier'];
     $ciCarrier = $_POST['cicarrier'];
-    $nameCarrier = $_POST['namecarrier'];
+	$birthdateCarrier = $_POST['birthDate'];
+    $nameCarrier= $_POST['namecarrier'];
     $addressCarrier = $_POST['addresscarrier'];
-    $phoneCarrier = $_POST['phonecarrier'];
-    $mobileCarrier = $_POST['mobilecarrier'];
+    $phoneCarrier= $_POST['phone'];
+    $mobileCarrier = $_POST['mobile'];
     $emailCarrier = $_POST['emailcarrier'];
     $truckPlate = $_POST['truckplate'];
     $truckType = $_POST['trucktype'];
 
-    $data =array('idcarrier' =>$idCarrier, 'cicarrier'=>$ $ciCarrier,
-                'namecarrier'=>$nameCarrier,'addresscarrier'=>$addressCarrier,'phonecarrier'=>$phoneCarrier,
-                'mobilecarrier'=>$mobileCarrier,'emailcarrier'=>$emailCarrier,'truckplate'=>$truckPlate,'trucktype'=> $truckType);    
+    $data =array('idCarrier' =>$idCarrier, 'ci'=>$ciCarrier,'birthDate'=>$birthdateCarrier,
+                'name'=>$nameCarrier,'address'=>$addressCarrier,'phone'=>$phoneCarrier,
+                'mobile'=>$mobileCarrier,'email'=>$emailCarrier,'truckPlate'=>$truckPlate,'truckType'=> $truckType);    
     
     $cli=curl_init($url);
     curl_setopt($cli, CURLOPT_RETURNTRANSFER, true);
@@ -28,96 +29,84 @@ if ($opcion =='Registrar'):
     $respone = curl_exec($cli);
     
     if($respone == false){    
-        echo"<center> <h1>Cliente Si Registrado</h1></center>";
-       echo $nameCustomer;
+        echo"<center> <h1>Transportista No Registrado</h1></center>";
+       
     }else{
-        echo"<center> <h1>Cliente No Registrado</h1></center>";
-        echo $idCustomer;
+        echo"<center> <h1>Transportista Registrado</h1></center>";
+        
         
     }
+	?>
+	<br>
+    <center >
+        <a href="../html/Carrier.html">Regresar</a>
+    </center>
+	<?php
+	
     
     curl_close($cli);
-    
-    elseif ($opcion == 'Ver registros'):
-        echo " <center><h1>SHOW CARRIERS</h1></center>";
-        $data = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/carrier/getcarriers"),true);
-        ?>
-        <center><table border="1" >
-                <tr>
-                    <td>idCarrier</td>
-                    <td>CI</td>
-                    <td>birthdate</td>
-                    <td>Name</td>
-                    <td>Address</td>
-                    <td>Phone</td>	
-                    <td>Mobile</td>
-                    <td>Email</td>
-                    <td>TruckPlate</td>
-                    <td>TruckType</td>		
-                </tr>
-
-                <?php 
-                foreach ($data as $d){
-                ?>
-                <tr>
-                    <td><?php echo $d['idCarrier'] ?></td>
-                    <td><?php echo $d['CI'] ?></td>
-                    <td><?php echo $d['birthdate'] ?></td>
-                    <td><?php echo $d['Name']?></td>
-                    <td><?php echo $d['Address']?></td>
-                    <td><?php echo $d['Phone'] ?></td>
-                    <td><?php echo $d['Mobile']?></td>
-                    <td><?php echo $d['Email']?></td>
-                    <td><?php echo $d['TruckPlate']?></td>
-                    <td><?php echo $d['TruckType']?></td>
-                </tr>
-                <?php 
-                }
-                ?>
-                </table>
-                        
-            </center>
-            <?php 
-            elseif ($opcion == 'Buscar'):
+    elseif ($opcion == 'Buscar'):
                 $id = $_POST['idcarrier'];
-                echo " <center><h1>Cliente</h1></center>";
-                // $dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$id"),true);
+                echo " <center><h1>Carrier</h1></center>";
+                //$dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/carrier/getcarrierbyid/$id"),true);
                 $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/carrier/getcarrierbyid/$id"),true);
-                ?>
-                <center><table border="1" >
-                        <tr>
-                            <td>idCarrier</td>
-                            <td>CI</td>
-                            <td>birthdate</td>
-                            <td>Name</td>
-                            <td>Address</td>
-                            <td>Phone</td>	
-                            <td>Mobile</td>
-                            <td>Email</td>
-                            <td>TruckPlate</td>
-                            <td>TruckType</td>
+                if($dataId==null){
+					echo "<center> <h2>No se Encontraron datos</h2></center>";
+                }else{
+					?>
+					<html lang="en">
+					<head>
+					<link rel="stylesheet" href="../css/styles.css">
+					  <title>Transportista</title>
+					 </head>
+					 <body>
+					<body class="col-sm-8 main-section mx-auto">
+						<br>
+					<div class="styletittle">
+                                        Datos del Transportista
+                                    </div><br>
+					<center><table class="table" border="1" >
+                        <tr class="table-primary">
+                            <td>codigotransp</td>
+							<td>ci</td>
+							<td>birthdate</td>
+							<td>nombre</td>
+							<td>direccion</td>
+							<td>telfconvencional</td>	
+							<td>telfcelular</td>
+							<td>correo</td>
+							<td>placaCamion</td>
+							<td>tipoCamion</td>
                         </tr>
         
                         <tr>
-                            <td><?php echo $dataId['idCarrier'] ?></td>
-                            <td><?php echo $dataId['CI'] ?></td>
-                            <td><?php echo $dataId['birthdate'] ?></td>
-                            <td><?php echo $dataId['Name']?></td>
-                            <td><?php echo $dataId['Address']?></td>
-                            <td><?php echo $dataId['Phone'] ?></td>
-                            <td><?php echo $dataId['Mobile']?></td>
-                            <td><?php echo $dataId['Email']?></td>
-                            <td><?php echo $dataId['TruckPlate']?></td>
-                            <td><?php echo $dataId['TruckType']?></td>
+                            <td><?php echo $dataId['idCarrier']?></td>
+							<td><?php echo $dataId['ci'] ?></td>
+							<td><?php echo $dataId['birthDate'] ?></td>
+							<td><?php echo $dataId['name']?></td>
+							<td><?php echo $dataId['address']?></td>
+							<td><?php echo $dataId['phone'] ?></td>
+							<td><?php echo $dataId['mobile']?></td>
+							<td><?php echo $dataId['email']?></td>
+							<td><?php echo $dataId['truckPlate']?></td>
+							<td><?php echo $dataId['truckType']?></td>>
                         </tr>
+						</body>
+						</html>
                         <?php 
                         
                         ?>
                         </table>
                                 
-                    </center>
-                    <?php 
-        elseif ($opcion == 'Eliminar'):
+                    </center><br>
+                    <?php
+					}
+			   ?>
+			   <center >
+					<a href="../html/Carrier.html">Regresar</a>
+				</center>
+		<?php
+		elseif ($opcion == 'Eliminar'):
             $idC = $_POST['idcarrier'];
 			//$url = "http://localhost:1024/FreightTransport/project/client/deleteClient/$idC";
             $url = "http://localhost:8080/FreightTransport/project/carrier/deletecarrier/$idC";           
@@ -127,26 +116,34 @@ if ($opcion =='Registrar'):
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
             curl_close($ch);
-            echo"<center> <h2>CARRIER DELETE</h2></center>";   
+            echo"<center> <h2>Transportista Eliminado</h2></center>"; 
+	?>
+	<br>
+    <center >
+        <a href="../html/Carrier.html">Regresar</a>
+    </center>
+    <?php
+	
          elseif ($opcion == 'Modificar'):  
             $idCarrier = $_POST['idcarrier'];
-            $ciCarrier = $_POST['cicarrier'];
-            $nameCarrier = $_POST['namecarrier'];
-            $addressCarrier = $_POST['addresscarrier'];
-            $phoneCarrier = $_POST['phonecarrier'];
-            $mobileCarrier = $_POST['mobilecarrier'];
-            $emailCarrier = $_POST['emailcarrier'];
-            $truckPlate = $_POST['truckplate'];
-            $truckType = $_POST['trucktype'];
+			$ciCarrier = $_POST['cicarrier'];
+			$birthdateCarrier = $_POST['birthDate'];
+			$nameCarrier= $_POST['namecarrier'];
+			$addressCarrier = $_POST['addresscarrier'];
+			$phoneCarrier= $_POST['phone'];
+			$mobileCarrier = $_POST['mobile'];
+			$emailCarrier = $_POST['emailcarrier'];
+			$truckPlate = $_POST['truckplate'];
+			$truckType = $_POST['trucktype'];
             
             $url = "http://localhost:8080/FreightTransport/project/carrier/updatecarrier/$idCarrier";
          // $url = "http://localhost:1024/FreightTransport/project/client/updateclient/$idCustomer";  
 
             
         
-            $data =array('idcarrier' =>$idCarrier, 'cicarrier'=>$ $ciCarrier,
-                         'namecarrier'=>$nameCarrier,'addresscarrier'=>$addressCarrier,'phonecarrier'=>$phoneCarrier,
-                         'mobilecarrier'=>$mobileCarrier,'emailcarrier'=>$emailCarrier,'truckplate'=>$truckPlate,'trucktype'=> $truckType);          
+            $data =array('idCarrier' =>$idCarrier, 'ci'=>$ciCarrier,'birthDate'=>$birthdateCarrier,
+                'name'=>$nameCarrier,'address'=>$addressCarrier,'phone'=>$phoneCarrier,
+                'mobile'=>$mobileCarrier,'email'=>$emailCarrier,'truckPlate'=>$truckPlate,'truckType'=> $truckType);          
                    
             $data_json = json_encode($data);
             $ch = curl_init();
@@ -156,15 +153,136 @@ if ($opcion =='Registrar'):
             curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             
-            $ch  = curl_exec($ch);
-            if($ch == false){    
-                echo"<center> <h1>Transportista Si Registrado</h1></center>";
-                echo $data_json;
-            }else{
-                echo"<center> <h1>Transportista No Registrado</h1></center>";
-                echo $ch;
-            }
+            $response  = curl_exec($ch);
             curl_close($ch);
+            echo"<center> <h2>Transportista Modificado</h2></center>"; 
+            echo $data_json; 
+	?>
+	<br>
+    <center >
+        <a href="../html/Carrier.html">Regresar</a>
+    </center>
+    <?php
+    elseif ($opcion == 'Ver Transportistas'):
+    
+        $data = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/carrier/getcarriers"),true);
+        ?>
+		<html lang="en">
+                <head>
+                <link rel="stylesheet" href="../css/styles.css">
+                    <title>Carriers</title>
+                </head>
+                <body>
+                <body class="col-sm-8 main-section mx-auto">
+                    <br>
+                <div class="styletittle">
+                                                Transportistas Registrados
+                                            </div><br>
+        <div style="text-align:center;">
+		<table class ="table" border="1" style="margin: 0 auto;">
+                <tr class="table-primary">
+                    <td>codigotransp</td>
+                    <td>ci</td>
+                    <td>birthdate</td>
+                    <td>nombre</td>
+                    <td>direccion</td>
+                    <td>telfconvencional</td>	
+                    <td>telfcelular</td>
+                    <td>correo</td>
+                    <td>placaCamion</td>
+                    <td>tipoCamion</td>	
+					
+                </tr>
+
+                <?php 
+                foreach ($data as $dataId){
+                ?>
+                <tr>
+                    <td><?php echo $dataId['idCarrier']?></td>
+                    <td><?php echo $dataId['ci']?></td>
+                    <td><?php echo $dataId['birthDate']?></td>
+                    <td><?php echo $dataId['name']?></td>
+                    <td><?php echo $dataId['address']?></td>
+                    <td><?php echo $dataId['phone']?></td>
+                    <td><?php echo $dataId['mobile']?></td>
+                    <td><?php echo $dataId['email']?></td>
+                    <td><?php echo $dataId['truckPlate']?></td>
+                    <td><?php echo $dataId['truckType']?></td>
+                </tr>
+				</body>
+				</html>
+                <?php 
+                }
+                ?>
+                </table>
+				</div>
+            </center>
+			 <center >
+			<a href="../html/Carrier.html">Regresar</a>
+			 </center>
+            <?php 
+            elseif ($opcion == 'BuscarPorPlaca'):
+                $truck = $_POST['truckplate'];
+                echo " <center><h1>Carrier</h1></center>";
+                //$dataId = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/carrier/getcarrierbyid/$id"),true);
+                $dataId = json_decode(file_get_contents("http://localhost:8080/FreightTransport/project/carrier/getcarrierbytruck/$truck"),true);
+                if($dataId==null){
+					echo "<center> <h2>No se Encontraron datos</h2></center>";
+                }else{
+					?>
+					<html lang="en">
+					<head>
+					<link rel="stylesheet" href="../css/styles.css">
+					  <title>Transportista</title>
+					 </head>
+					 <body>
+					<body class="col-sm-8 main-section mx-auto">
+						<br>
+					<div class="styletittle">
+                                        Lista de Transportistas - Camiones
+                                    </div><br>
+					<center><table class="table" border="1" >
+                        <tr class="table-primary">
+                            <td>codigotransp</td>
+							<td>ci</td>
+							<td>birthdate</td>
+							<td>nombre</td>
+							<td>direccion</td>
+							<td>telfconvencional</td>	
+							<td>telfcelular</td>
+							<td>correo</td>
+							<td>placaCamion</td>
+							<td>tipoCamion</td>
+                        </tr>
+        
+                        <tr>
+                            <td><?php echo $dataId['idCarrier']?></td>
+							<td><?php echo $dataId['ci'] ?></td>
+							<td><?php echo $dataId['birthDate'] ?></td>
+							<td><?php echo $dataId['name']?></td>
+							<td><?php echo $dataId['address']?></td>
+							<td><?php echo $dataId['phone'] ?></td>
+							<td><?php echo $dataId['mobile']?></td>
+							<td><?php echo $dataId['email']?></td>
+							<td><?php echo $dataId['truckPlate']?></td>
+							<td><?php echo $dataId['truckType']?></td>>
+                        </tr>
+						</body>
+						</html>
+                        <?php 
+                        
+                        ?>
+                        </table>
+                                
+                    </center><br>
+                    <?php
+					}
+			   ?>
+			   <center >
+					<a href="../html/Carrier.html">Regresar</a>
+				</center>
+		<?php 
+        
              
     endif;
  ?>

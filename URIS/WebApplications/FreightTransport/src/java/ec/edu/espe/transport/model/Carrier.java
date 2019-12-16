@@ -10,7 +10,7 @@ package ec.edu.espe.transport.model;
  * @author DenniseSandoval
  */
 public class Carrier {
-   private int idCarrier;
+   private String idCarrier;
    private String ci;
    private String birthDate;
    private String name;
@@ -20,8 +20,10 @@ public class Carrier {
    private String email;
    private String truckPlate;
    private String truckType;
+   public Carrier() {
+    }
 
-    public Carrier(int idCarrier, String ci, String birthDate, String name, String address, String phone, String mobile, String email, String truckPlate, String truckType) {
+    public Carrier(String idCarrier, String ci, String birthDate, String name, String address, String phone, String mobile, String email, String truckPlate, String truckType) {
         this.idCarrier = idCarrier;
         this.ci = ci;
         this.birthDate = birthDate;
@@ -34,14 +36,12 @@ public class Carrier {
         this.truckType = truckType;
     }
 
-    public Carrier() {
-    }
-
-    public int getIdCarrier() {
+    
+    public String getIdCarrier() {
         return idCarrier;
     }
 
-    public void setIdCarrier(int idCarrier) {
+    public void setIdCarrier(String idCarrier) {
         this.idCarrier = idCarrier;
     }
 
@@ -115,6 +115,11 @@ public class Carrier {
 
     public void setTruckType(String truckType) {
         this.truckType = truckType;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrier{" + "idCarrier=" + idCarrier + ", ci=" + ci + ", birthDate=" + birthDate + ", name=" + name + ", address=" + address + ", phone=" + phone + ", mobile=" + mobile + ", email=" + email + ", truckPlate=" + truckPlate + ", truckType=" + truckType + '}';
     }
    
    

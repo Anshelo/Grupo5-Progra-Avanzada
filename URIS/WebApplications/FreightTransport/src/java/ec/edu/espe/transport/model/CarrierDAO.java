@@ -26,17 +26,20 @@ public class CarrierDAO {
     }
   
     
-    public ArrayList<Carrier> SearchTruckCarrier(String truck) {
+    public Carrier SearchTruckCarrier(String truck) {
         ArrayList <Carrier> listaB=new ArrayList <Carrier>();
-        Carrier carrier;
+        Carrier carrier = new Carrier();
         try{
             Connection acceso = con.connect();
             
-            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM transportista where tipoCamion='"+truck+"'");
+            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM transportista ");
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
+                if(truck.equals(rs.getString(9))){
+                    
+        
                 carrier=new Carrier();
-                carrier.setIdCarrier(rs.getInt(1));
+                carrier.setIdCarrier(Integer.toString(rs.getInt(1)));
                 carrier.setCi(rs.getString(2));
                 carrier.setBirthDate(rs.getString(3));
                 carrier.setName(rs.getString(4));
@@ -47,21 +50,20 @@ public class CarrierDAO {
                 carrier.setTruckPlate(rs.getString(9));
                 carrier.setTruckType(rs.getString(10));
                 
-      
-                listaB.add(carrier);
+                }
             }
         }catch(SQLException ex){
             System.out.println(ex);
         }
-        return listaB;
+        return carrier;
          
   }
     public Carrier addCarrier(Carrier carrier)throws SQLException{
         Connection acceso = con.connect();
-        String sql = "INSERT INTO transportista (codigotransp,ci,birthdate,nombre,direccion,telfconvencional,telfcelular,correo,placaCamion,tipoCamion) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO transportista VALUES(?,?,?,?,?,?,?,?,?,?)";
          try {
             PreparedStatement ps = acceso.prepareStatement(sql);
-            ps.setInt(1, carrier.getIdCarrier());
+            ps.setInt(1, Integer.valueOf(carrier.getIdCarrier()));
             ps.setString(2, carrier.getCi());
             ps.setString(3, carrier.getBirthDate());
             ps.setString(4, carrier.getName());
@@ -76,7 +78,7 @@ public class CarrierDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        carrier = new Carrier(carrier.getIdCarrier(),carrier.getCi(),carrier.getBirthDate(),carrier.getName(),carrier.getAddress(),carrier.getPhone(),carrier.getMobile(),carrier.getEmail(),carrier.getTruckPlate(),carrier.getTruckType());
+        
         return carrier;
     }
     public ArrayList<Carrier> searchTruckCarrier(String truck) {
@@ -88,7 +90,7 @@ public class CarrierDAO {
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 carrier=new Carrier();
-                carrier.setIdCarrier(rs.getInt(1));
+                carrier.setIdCarrier(rs.getString(1));
                 carrier.setCi(rs.getString(2));
                 carrier.setBirthDate(rs.getString(3));
                 carrier.setName(rs.getString(4));
@@ -105,16 +107,17 @@ public class CarrierDAO {
         }
         return listaB;
     }
-    public ArrayList<Carrier> printCarrierById(int id) {
+    public Carrier printCarrierById(String id) {
         ArrayList <Carrier> listaB=new ArrayList <Carrier>();
-        Carrier carrier;
+        Carrier carrier = new Carrier();
         Connection acceso = con.connect();
         try{
-            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM transportista where codigotransp='"+id+"'");
+            PreparedStatement ps= acceso.prepareStatement("SELECT * FROM transportista");
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
-                carrier=new Carrier();
-                carrier.setIdCarrier(rs.getInt(1));
+                if(id.equals(rs.getString(1))){
+                carrier = new Carrier();
+                carrier.setIdCarrier(rs.getString(1));
                 carrier.setCi(rs.getString(2));
                 carrier.setBirthDate(rs.getString(3));
                 carrier.setName(rs.getString(4));
@@ -124,12 +127,12 @@ public class CarrierDAO {
                 carrier.setEmail(rs.getString(8));
                 carrier.setTruckPlate(rs.getString(9));
                 carrier.setTruckType(rs.getString(10));
-                listaB.add(carrier);
+                }
             }
         }catch(SQLException ex){
             System.out.println(ex);
         }
-        return listaB;
+        return carrier;
     }
     public ArrayList<Carrier> printCarrier() {
         ArrayList <Carrier> listaB=new ArrayList <Carrier>();
@@ -140,7 +143,7 @@ public class CarrierDAO {
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 carrier=new Carrier();
-                carrier.setIdCarrier(rs.getInt(1));
+                carrier.setIdCarrier(rs.getString(1));
                 carrier.setCi(rs.getString(2));
                 carrier.setBirthDate(rs.getString(3));
                 carrier.setName(rs.getString(4));
@@ -169,20 +172,61 @@ public class CarrierDAO {
             System.out.println(ex);
         }
     }
-    public void deleteCarrier(int id){
-        int res = 0;
+    public void deleteCarrier(String id){
+       
         try{
             //preparar la ejecucion
             Connection accesoDB = con.connect();
             PreparedStatement ps = accesoDB.prepareStatement("DELETE FROM transportista WHERE codigotransp='"+id+ "'");
-            res = ps.executeUpdate();
-            if (res>0){
-                JOptionPane.showMessageDialog(null,"Registro eliminado.....");
-            }
+            ps.executeUpdate();
+        
         }
         catch(SQLException e){
             System.out.println(e);
         }
+    }
+    public boolean validadorDeCedula(String cedula) {
+        boolean cedulaCorrecta = false;
+        try {
+            if (cedula.length() == 10) // ConstantesApp.LongitudCedula
+            {
+                int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+                if (tercerDigito < 6) {
+// Coeficientes de validación cédula
+// El decimo digito se lo considera dígito verificador
+                    int[] coefValCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+                    int verificador = Integer.parseInt(cedula.substring(9, 10));
+                    int suma = 0;
+                    int digito = 0;
+                    for (int i = 0; i < (cedula.length() - 1); i++) {
+                        digito = Integer.parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+                        suma += ((digito % 10) + (digito / 10));
+                    }
+
+                    if ((suma % 10 == 0) && (suma % 10 == verificador)) {
+                        cedulaCorrecta = true;
+                    } else if ((10 - (suma % 10)) == verificador) {
+                        cedulaCorrecta = true;
+                    } else {
+                        cedulaCorrecta = false;
+                    }
+                } else {
+                    cedulaCorrecta = false;
+                }
+            } else {
+                cedulaCorrecta = false;
+            }
+        } catch (NumberFormatException nfe) {
+            cedulaCorrecta = false;
+        } catch (Exception err) {
+            System.out.println("Una excepcion ocurrio en el proceso de validadcion");
+            cedulaCorrecta = false;
+        }
+
+        if (!cedulaCorrecta) {
+            System.out.println("La Cédula ingresada es Incorrecta");
+        }
+        return cedulaCorrecta;
     }
  
    
