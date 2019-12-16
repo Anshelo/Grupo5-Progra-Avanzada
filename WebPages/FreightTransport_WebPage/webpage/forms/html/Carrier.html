@@ -1,18 +1,16 @@
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">    
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/font-awesome.css">
+    
     <script src="../js/validations.js"></script>
-    <script src="../php/json.php"></script>
     <title>Formulario Transportista</title>
 </head>
 
 <body>
-    <div class="modal-body">
-        <form name="carrier" method="post" action="../php/carrier.php">
+    <div class="modal-body text-center">
+        <form name="Carrier" method="post" action="../php/carrier.php">
 
             <div class="col-sm-8 main-section mx-auto">
                 <div class="modal-content">
@@ -22,7 +20,7 @@
 
                                 <head>
                                     <div class="styletittle">
-                                        Transportista
+                                        Formulario de Transportistas
                                     </div>
                                 </head>
                                 <tbody>
@@ -35,7 +33,7 @@
                                                     <div class="label">Código: </div>
                                                 </td>
 
-                                                <td><input type="text" class="form-control" name="codcarrier" id="id" placeholder="1" onchange="validatenumbers()" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                                <td><input type="text" class="form-control" name="idcarrier" id="idcarrier" placeholder="1" onkeypress="return validatenumbers(event)" onpaste="return false" ></td>
                                                 <td colspan="3"></td>
 
                                             </div>
@@ -46,14 +44,11 @@
                                                 <div class="label">Cédula: </div>
                                             </td>
 
-                                            <td><input type="text" class="form-control" name="cicarrier" id="id" placeholder="1714678823" onchange="
-                                                       if (!validarDocumento())
-                                                        alert('Cedula incorrecta');
-                                                    " onkeypress="return validatenumbers(event)" onpaste="return false"></td>
+                                            <td><input type="text" class="form-control" name="cicarrier" id="cicarrier" placeholder="1714678823" onchange="if (!validarDocumento())  cleanCI();" onkeypress="return validatenumbers(event)" onpaste="return false"></td>
                                             <td>
                                                 <td colspan="2"></td>
                                                 <td>
-                                                    <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Registrar">
+                                                    <input type="submit" class="btn btn-primary btn-block center " name="option" value="Registrar" style="background-color: rgb(52, 162, 212);">
                                                 </td>
                                         </div>
                                     </tr>
@@ -63,13 +58,13 @@
                                                 <div class="label">Nombre: </div>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="namecarrier" placeholder="Juan Perez" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false" required></td>
+                                                <input type="text" class="form-control" name="namecarrier" id="namecarrier" placeholder="Juan Perez" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false"></td>
                                             <td colspan="2">
                                             </td>
                                             <td>
                                             </td>
                                             <td>
-                                                <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Eliminar">
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Buscar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -78,14 +73,14 @@
                                             <td>
                                                 <div class="label">Fecha de Nacimiento: </div>
                                             </td>
-                                            <td><input id="date" class="form-control" type="date" required></td>
+                                            <td><input id="birthdatecarrier" name="birthDate" class="form-control" type="date"></td>
                                             <td></td>
                                             <td>
 
                                             </td>
                                             <td> </td>
                                             <td>
-                                                <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Modificar">
+                                                <input type="submit" class="btn btn-primary btn-block center " name="option" value="Eliminar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -94,14 +89,14 @@
                                             <td>
                                                 <div class="label">Fono Convencional: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="fono1customer" id="id" placeholder="2736666" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="phone" id="phonecarrier" placeholder="2736666" onkeypress="return validatenumbers(event)" onpaste="return false"></td>
                                             <td></td>
                                             <td>
 
                                             </td>
                                             <td> </td>
                                             <td>
-                                                <input style="background-color: rgb(52, 162, 212);" class="btn btn-primary btn-block  center " type="submit" class="" name="option" value="Mostrar">
+												<input type="submit" class="btn btn-primary btn-block center " name="option" value="Modificar" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                         </div>
                                     </tr>
@@ -110,10 +105,14 @@
                                             <td>
                                                 <div class="label">Número celular: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="fono2customer" id="id" placeholder="0998764876" onkeypress="return validatenumbers(event)" onpaste="return false" required></td>
+                                            <td><input type="text" class="form-control" name="mobile" id="mobilecarrier" placeholder="0998764876" onkeypress="return validatenumbers(event)" onpaste="return false"></td>
                                             <td></td>
-                                            <td>
+											<td>
 
+                                            </td>
+                                            <td> </td>
+                                            <td>
+												<input type="submit" class="btn btn-primary btn-block center " name="option" value="Ver Transportistas" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                             <td> </td>
                                             <td> </td>
@@ -125,10 +124,14 @@
                                             <td>
                                                 <div class="label">Correo Electrónico: </div>
                                             </td>
-                                            <td><input type="email" class="form-control" name="fono2customer" id="id" placeholder="@hotmail.com" required></td>
+                                            <td><input type="email" class="form-control" name="emailcarrier" id="emailcarrier" placeholder="@hotmail.com"></td>
                                             <td></td>
-                                            <td>
+											<td>
 
+                                            </td>
+                                            <td> </td>
+                                            <td>
+												<input type="submit" class="btn btn-primary btn-block center " name="option" value="BuscarPorPlaca" style="background-color: rgb(52, 162, 212);">
                                             </td>
                                             <td> </td>
                                             <td> </td>
@@ -140,7 +143,7 @@
                                             <td>
                                                 <div class="label">Dirección: </div>
                                             </td>
-                                            <td><textarea class="form-control textarea-client" name="fono2customer" id="id" placeholder="Mi dirección de vivienda" required></textarea></td>
+                                            <td><textarea class="form-control textarea-client" name="addresscarrier" id="addresscarrier" placeholder="Mi dirección de vivienda"></textarea></td>
                                             <td></td>
                                             <td>
 
@@ -156,7 +159,7 @@
                                                 <div class="label">Placa Camión: </div>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="truckplate" placeholder="PBB-7758" required></td>
+                                                <input type="text" class="form-control" name="truckplate" id="truckplate" placeholder="PBB-7758"></td>
                                             <td colspan="2">
                                             </td>
                                             <td>
@@ -170,7 +173,7 @@
                                                     <div class="label">Tipo Camión: </div>
                                                 </td>
                                                 <td>
-                                                    <select name="trucktype" class="form-control">
+                                                    <select name="trucktype" id= "trucktype" class="form-control">
 											<option>Articulado</option>
 											<option>Trailer</option>
 											<option>Rigido</option>

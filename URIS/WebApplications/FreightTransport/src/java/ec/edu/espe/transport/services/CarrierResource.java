@@ -78,35 +78,36 @@ public class CarrierResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Carrier insertCarrier(Carrier carrier) throws SQLException{
         CarrierDAO carrierObj = new CarrierDAO();
-       return carrierObj.addCarrier(carrier);
+        if(carrierObj.validadorDeCedula(carrier.getCi())){
+            return carrierObj.addCarrier(carrier);
+        }else{
+            return new Carrier();
+        }
+  
     }
     
     @Path("getcarrierbytruck/{trucktype}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Carrier> getCarrierTruck(@PathParam("trucktype")String truckType) {
+    public Carrier getCarrierTruck(@PathParam("trucktype")String truckType) {
         CarrierDAO carrierList = new CarrierDAO();
          ArrayList<Carrier> carrierVO=new ArrayList<Carrier>();
-         carrierVO = carrierList.SearchTruckCarrier(truckType);
-         return carrierVO;
+         
+         return carrierList.SearchTruckCarrier(truckType);
     }
     @Path("getcarrierbyid/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Carrier> getCarrierTruck(@PathParam("id")int id) {
+    public Carrier getCarrierID(@PathParam("id")String id) {
         CarrierDAO carrierList = new CarrierDAO();
-         ArrayList<Carrier> carrierVO=new ArrayList<Carrier>();
-         carrierVO = carrierList.printCarrierById(id);
-         return carrierVO;
+         return carrierList.printCarrierById(id);
     }
     @Path("getcarriers")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Carrier> getCarrier() {
         CarrierDAO carrierList = new CarrierDAO();
-         ArrayList<Carrier> carrierVO=new ArrayList<Carrier>();
-         carrierVO = carrierList.printCarrier();
-         return carrierVO;
+         return carrierList.printCarrier();
     }
     @Path("/showcarrierbyid/{idguide}")
     @GET
@@ -127,13 +128,13 @@ public class CarrierResource {
         CarrierDAO carrier=new CarrierDAO();
         
         ArrayList<Carrier> listCarrier=new ArrayList<Carrier>();
-        listCarrier=carrier.printCarrierById(data.getIdCarrier());
+        
         return listCarrier;
     }
     @DELETE
     @Path("deletecarrier/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteCarrier(@PathParam("id")int id) {
+    public void deleteCarrier(@PathParam("id")String id) throws SQLException{
         CarrierDAO response = new CarrierDAO();
         response.deleteCarrier(id);
     }
