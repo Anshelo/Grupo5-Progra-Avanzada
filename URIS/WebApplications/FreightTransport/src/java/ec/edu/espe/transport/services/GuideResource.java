@@ -75,7 +75,15 @@ public class GuideResource {
         listGuide=guide.showAllGuides();
         return listGuide;
     }
-    
+    @Path("/removeguidedetail/{idguide}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ArrayList<GuideDetail> deleteGuideDetail(@PathParam("idguide") String id) throws SQLException{
+        GuideDAO guide =new GuideDAO();
+        guide.deleteGuideDetail(id);
+        ArrayList<GuideDetail> listGuide= new ArrayList<GuideDetail>();
+        return listGuide;
+    }
     @Path("/updateguide/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

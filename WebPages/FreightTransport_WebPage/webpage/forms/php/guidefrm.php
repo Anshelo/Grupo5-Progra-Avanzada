@@ -1,3 +1,6 @@
+<?php
+  $mysqli = new mysqli('dbinstance.cndtjrwnep9m.us-east-1.rds.amazonaws.com', 'root', '12345678', 'database_transportes');
+?>
 <html lang="en">
 
 <head>
@@ -11,7 +14,7 @@
 </head>
 
 <body>
-
+    
     <form name="guide" id="guideproduct" method="post" action="../php/guide.php">
         <div class="modal-body text-center">
             <div class="col-sm-8 main-section mx-auto">
@@ -74,31 +77,51 @@
                                     <tr>
                                         <div class="form-group">
                                             <td>
-                                                <div class="label">Cedula: </div>
+                                                <div class="label">Nombre: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcustomer" id="id" placeholder="1714678823" onchange="
-                                                       if (!validarDocumento())
-                                                        alert('Cedula incorrecta');
-                                                    " onkeypress="return validatenumbers(event)" onpaste="return false"></td>
-                                            <td></td>
                                             <td>
-                                                <div class="label">Cedula: </div>
+                                            <select name="idcustomer" id="idcustomer"class="form-control">
+                                                <option value="0">Seleccione:</option>
+                                                <?php
+                                                $query = $mysqli -> query ("SELECT * FROM cliente");
+                                                while ($valores = mysqli_fetch_array($query)) {
+                                                    echo '<option value="'.$valores[ci].'">'.$valores[nombre].'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                            </td><td></td>
+                                            <td>
+                                                <div class="label">Nombre: </div>
                                             </td>
-                                            <td><input type="text" class="form-control" name="idcarrier" id="id" placeholder="1714678823" onchange="
-                                                    if (!validarDocumento())
-                                                     alert('Cedula incorrecta');
-                                                 " onkeypress="return validatenumbers(event)" onpaste="return false"></td>
-
+                                            <td>
+                                            <select name="idcarrier" id="idcarrier"class="form-control">
+                                                <option value="0">Seleccione:</option>
+                                                <?php
+                                                $query = $mysqli -> query ("SELECT * FROM transportista");
+                                                while ($valores = mysqli_fetch_array($query)) {
+                                                    echo '<option value="'.$valores[ci].'">'.$valores[nombre].'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                            </td>
                                         </div>
                                     </tr>
 
                                     <tr>
                                         <div class="form-group">
                                             <td>
-                                                <div class="label">Codigo zona envio: </div>
+                                                <div class="label">Zona de envio: </div>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="codezone" placeholder="1" onkeypress="return validatenumbers(event)" onpaste="return false">
+                                            <select name="codezone" id="codezone"class="form-control">
+                                                <option value="0">Seleccione:</option>
+                                                <?php
+                                                $query = $mysqli -> query ("SELECT * FROM zona");
+                                                while ($valores = mysqli_fetch_array($query)) {
+                                                    echo '<option value="'.$valores[codigozona].'">'.$valores[nombrezona].'</option>';
+                                                }
+                                                ?>
+                                            </select>
                                             </td>
                                             <td colspan="4"></td>
                                         </div>
@@ -113,45 +136,42 @@
 
                                         </div>
                                     </tr>
-                                    <tr>
+                                </tbody>
+                                <table class="table">
+                                   <body>
+                                   <tr>
                                         <div class="form-group">
-                                            <td>
-                                                <div class="label">Codigo </div>
-                                            </td>
-                                            <td colspan="2">
-                                                <div class="label">Nombre</div>
-                                            </td>
-                                            <td>
-                                                <div class="label">Peso(Kg) </div>
-                                            </td>
-                                            <td>
+                                            <td colspan="3">
+                                                <div class="label">Descripcion </div>
+                                            </td><td></td>
+                                            <td >
                                                 <div class="label">Cantidad </div>
-                                            </td>
+                                            </td><td></td><td></td>
                                         </div>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="text" class="form-control" name="codeproduct" id="codeproduct" placeholder="01" onkeypress="return validatenumbers(event)" onpaste="return false">
-                                        </td>
-
-                                        <td colspan="2">
-                                            <input type="text" class="form-control" name="nameproduct" placeholder="Mesa" onkeypress="return validateletters(event)" onpaste="return false" onfocus="return false">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="weightproduct" placeholder="22" onkeypress="return validatedoubles(event)" onpaste="return false">
-                                        </td>
+                                    <div class="form-group">
+                                    <td colspan="3">
+                                            <select name="codeproduct" id="codeproduct"class="form-control">
+                                                <option value="0">Seleccione:</option>
+                                                <?php
+                                                $query = $mysqli -> query ("SELECT * FROM producto");
+                                                while ($valores = mysqli_fetch_array($query)) {
+                                                    echo '<option value="'.$valores[codigoprod].'">'.$valores[nombreprod].'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                            </td><td></td>
                                         <td>
                                             <input type="number" min="1" class="form-control" id="quantityproduct" name="quantityproduct" placeholder="4" onkeypress="return validatedoubles(event)" onpaste="return false">
-                                        </td>
-
-                                        <td style="text-align:  right;">
+                                        </td><td></td>
+                                        <td >
                                             <input style="background-color: rgb(52, 162, 212); object-position: right;" class="btn btn-primary  center " type="submit" class="" id="addproduct" name="option" value="+">
-                                        </td>
-                                        <p class="respuesta"></p>
+                                        <p class="respuesta"></p></td>       
+                                    </div>
                                     </tr>
-
-
-                                </tbody>
+                                            </body>                 
+                                </table>
                             </table>
                             <table class="table">
 
@@ -180,7 +200,7 @@
                                         <td>
                                             <td colspan="3">
                                                 <center>
-                                                    <a href="home.html">Menu Principal</a>
+                                                    <a href="../html/home.html">Menu Principal</a>
                                                 </center>
 
                                             </td>
@@ -196,3 +216,5 @@
         </div>
     </form>
 </body>
+
+</html>

@@ -1,4 +1,7 @@
 <?php
+  $mysqli = new mysqli('dbinstance.cndtjrwnep9m.us-east-1.rds.amazonaws.com', 'root', '12345678', 'database_transportes');
+?>
+<?php
 $opcion=$_POST['option'];
 if ($opcion =='Registrar'):
     $url = "http://localhost:1024/FreightTransport/project/guide/insertguide";
@@ -19,7 +22,12 @@ if ($opcion =='Registrar'):
     $respone = curl_exec($cli);
     curl_close($cli);
     $idg = $_POST['idguide'];
+    $codeproduct = $_POST['codeproduct']; 
                 $dataread = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/guide/showguidebyid/$idg"),true);
+                $datareadclient = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/client/searchClient/$idcustomer"),true);
+                $datareadcarrier = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/carrier/showcarrierbyid/$idcarrier"),true);
+                $datareadzone = json_decode(file_get_contents("http://localhost:1024/FreightTransport/project/zone/zone/$codezone"),true);
+
 ?>
                 <html lang="en">
 <head>
@@ -52,7 +60,7 @@ if ($opcion =='Registrar'):
                                             <td>
                                                 <div class="label">Id Guia: </div>
                                             </td>
-                                            <td><input type="number" class="form-control" name="idguide" value="<?php echo $dataread['guideId'] ?>"></td>
+                                            <td><input type="number" class="form-control" id="idguide" name="idguide" disabled value="<?php echo $dataread['guideId'] ?>"></td>
                                             <td colspan="4"></td>
                                         </div>
                                     </tr>
@@ -61,13 +69,13 @@ if ($opcion =='Registrar'):
                                             <td>
                                                 <div class="label">Fecha envio: </div>
                                             </td>
-                                            <td><input type="date" value="<?php echo $dataread['sendDate'] ?>" class="form-control" name="datesent" >
+                                            <td><input type="date" value="<?php echo $dataread['sendDate'] ?>" disabled class="form-control" name="datesent" >
                                             </td>
                                             <td></td>
                                             <td>
                                                 <div class="label">Fecha llegada: </div>
                                             </td>
-                                            <td><input type="date" value="<?php echo $dataread['deliverDate'] ?>" class="form-control" name="datereceive" >
+                                            <td><input type="date" value="<?php echo $dataread['deliverDate'] ?>" disabled  class="form-control" name="datereceive" >
                                             </td>
                                             <td colspan="4"></td>
                                         </div>
@@ -84,12 +92,47 @@ if ($opcion =='Registrar'):
                                         <tr>
                                             <div class="form-group">
                                                 <td>
-                                                    <div class="label">Cedula: </div>
+                                                    <div class="label">Cedula </div>
                                                 </td>
-                                                <td><input type="text" class="form-control" name="idcustomer" id="id" value="<?php echo $dataread['customerId'] ?>"></td>
-                                    
+                                                <td><input type="text" class="form-control" name="idcustomer" disabled  id="id" value="<?php echo $dataread['customerId'] ?>"></td>
+                                                <td></td>
+                                                <td >
+                                                    <div class="label">Nombre </div>
+                                                </td>
+                                                <td ><input type="text" class="form-control" name="idcustomer" disabled  id="id" value="<?php echo $datareadclient['nameClient'] ?>"></td>
+                                            
+                                               
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                            <td>
+                                                    <div class="label">Direccion </div>
+                                                </td>
+                                                <td ><input type="text" class="form-control" name="idcustomer" disabled  id="id" value="<?php echo $datareadclient['addressClient'] ?>"></td>
+                                                <td></td>
+                                                <td >
+                                                    <div class="label">Email </div>
+                                                </td>
+                                                <td><input type="text" class="form-control" name="idcustomer" disabled  id="id" value="<?php echo $datareadclient['emailClient'] ?>"></td>
+                                                
+                                                
                                             </div>
                                         </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                            <td >
+                                                    <div class="label">Celular </div>
+                                                </td>
+                                                <td><input type="text" class="form-control" name="idcustomer" disabled  id="id" value="<?php echo $datareadclient['mobileClient'] ?>"></td>
+                                                <td></td>
+                                                <td >
+                                                    <div class="label">RUC </div>
+                                                </td>
+                                                <td ><input type="text" class="form-control" name="idcustomer" disabled  id="id" value="<?php echo $datareadclient['rucClient'] ?>"></td>
+                                            
+                                            </div>
+                                        </tr>
+                                       
                                         <tr>
                                             <div class="form-group label">
                                                 <td colspan="7">
@@ -105,9 +148,30 @@ if ($opcion =='Registrar'):
                                                 <td>
                                                     <div class="label">Cedula: </div>
                                                 </td>
-                                                <td><input type="text" class="form-control" value="<?php echo $dataread['carrierCard']?>" name="idcarrier" id="id">
+                                                <td><input type="text" class="form-control" disabled  value="<?php echo $dataread['carrierCard']?>" name="idcarrier" >
                                                 </td>
-                                            
+                                                <td></td>
+                                                <td>
+                                                    <div class="label">Nombre: </div>
+                                                </td>
+                                                <td >
+                                                    <input type="text" class="form-control" disabled name="codezone" value="<?php echo $datareadcarrier['name']?>">
+                                                </td>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                                <td>
+                                                    <div class="label">Tipo Camion: </div>
+                                                </td>
+                                                <td><input type="text" class="form-control" disabled  value="<?php echo $datareadcarrier['truckType']?>" name="idcarrier" >
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="label">Placa: </div>
+                                                </td>
+                                                <td><input type="text" class="form-control" disabled  value="<?php echo $datareadcarrier['truckPlate']?>" name="idcarrier" >
+                                                </td>
                                             </div>
                                         </tr>
                                         <tr>
@@ -115,19 +179,68 @@ if ($opcion =='Registrar'):
                                                 <td>
                                                     <div class="label">Codigo zona envio: </div>
                                                 </td>
-                                                <td colspan="2">
-                                                    <input type="text" class="form-control" name="codezone" value="<?php echo $dataread['zoneCode']?>">
+                                                <td >
+                                                    <input type="text" class="form-control" disabled name="codezone" value="<?php echo $dataread['zoneCode']?>">
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="label">Ciudad: </div>
+                                                </td>
+                                                <td >
+                                                    <input type="text" class="form-control" disabled name="codezone" value="<?php echo $datareadzone['nombrezona']?>">
                                                 </td>
                                             </div>
                                         </tr>
-                                      
                                         <tr>
+                                            <div class="form-group">
+                                                <td>
+                                                    <div class="label">Codigo </div>
+                                                </td>
+                                                <td>
+                                                    <div class="label">Descipcion </div>
+                                                </td>
+                                                <td>
+                                                    <div class="label">Cantidad </div>
+                                                </td>
+                                                <td>
+                                                    <div class="label">Peso </div>
+                                                </td>
+                                                <td>
+                                                    <div class="label">Valor Unitario</div>
+                                                </td>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="form-group">
+                                            <table class="table">
+                                                <?php
+                                                $query = $mysqli -> query ("SELECT d.codproducto, p.nombreprod, d.cantidad, p.valorunit, p.peso FROM detalleguia d, producto p where d.codproducto=p.codigoprod and d.idguia like $idguide");
+                                                    while($valores=mysqli_fetch_array($query))
+                                                    {
+                                                        echo "<tr>"
+                                                            ."<td>".$valores['codproducto']."</td>"
+                                                            ."<td>".$valores['nombreprod']."</td>"
+                                                            ."<td>".$valores['cantidad']."</td>"
+                                                            ."<td>".$valores['peso']."</td>"
+                                                            ."<td>".$valores['valorunit']."</td>"
+                                                            ."</tr>";
+                                                    }
+                                                    ?>
+                                            </table>
+                                            
+                                            </div>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            <table class="table">
+                                <body>
+                                <tr>
                                             <div class="form-group">
                                                 <td>
                                                     <div class="label">Cantidad total:</div>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="quantityguide" value="<?php echo $dataread['quantity']?>">
+                                                    <input type="text" class="form-control" disabled  id="quantityguide"name="quantityguide" value="<?php echo $dataread['quantity']?>">
                                                 </td>
                                             </div>
                                             <div class="form-group">
@@ -135,33 +248,23 @@ if ($opcion =='Registrar'):
                                                     <div class="label">Total a pagar: </div>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="totalguide" value="<?php echo $dataread['total']?>">
+                                                    <input type="text" class="form-control" disabled name="totalguide" value="<?php echo $dataread['total']?>">
                                                 </td>
                                                 <td></td>
                                                 <td></td>
                                             </div>
 
                                         </tr>
+                                        <tr>
+                                        <td colspan="3">
+                                                <center>
+                                                    <a href="../html/home.html">Menu Principal</a>
+                                                </center>
 
-                                </tbody>
-                            </table>
-                            
-                        </form>
-                        <form method="POST" action="../html/home.html">
-                        <table class="table">
-
-                                <body>
-                                    <tr>
-                                        <div class="form-group">
-                                           
-                                            <td>
-                                                <input style="background-color: rgb(52, 162, 212);" type="submit" class="btn btn-primary center " name="option" value="Inicio">
                                             </td>
-                                        </div>
                                     </tr>
                                 </body>
                             </table>
-</form>
                     </div>
                 </div>
             </div>
@@ -272,15 +375,28 @@ elseif ($opcion == 'Ver registros'):
                     <?php 
         elseif ($opcion == 'Eliminar'):
             $idG = $_POST['idguide'];
-            $url = "http://localhost:1024/FreightTransport/project/guide/removeguide/$idG";           
+            $url = "http://localhost:1024/FreightTransport/project/guide/removeguide/$idG";   
+            $url2="http://localhost:1024/FreightTransport/project/guide/removeguidedetail/$idG";     
             $ch = curl_init();
+            $ch2 = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch2, CURLOPT_URL, $url2);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, "DELETE");
+            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
             $response  = curl_exec($ch);
+            $response2  = curl_exec($ch2);
             curl_close($ch);
-            echo"<center> <h2>GUIDE DELETE</h2></center>";   
-         elseif ($opcion == 'Modificar'):  
+            curl_close($ch2);
+            echo"<center> <h2>GUIDE DELETE</h2></center>"; ?>  
+            <td colspan="3">
+                                                <center>
+                                                    <a href="../html/home.html">Menu Principal</a>
+                                                </center>
+
+                                            </td>
+         <?php elseif ($opcion == 'Modificar'):  
             
             $idgui = $_POST['idguide'];
             $datesentm = $_POST['datesent'];

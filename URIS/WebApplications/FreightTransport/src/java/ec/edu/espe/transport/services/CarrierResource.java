@@ -108,6 +108,15 @@ public class CarrierResource {
          carrierVO = carrierList.printCarrier();
          return carrierVO;
     }
+    @Path("/showcarrierbyid/{idguide}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Carrier getGuidebyId(@PathParam("idguide") String id) throws SQLException {
+        CarrierDAO guide = new CarrierDAO();
+        Carrier objGuide= new Carrier();
+        objGuide=guide.searchCarrierbyId(id);
+        return objGuide;
+    }
     @PUT
     @Path("/updatecarrier/{id}")
     @Consumes(MediaType.APPLICATION_JSON)

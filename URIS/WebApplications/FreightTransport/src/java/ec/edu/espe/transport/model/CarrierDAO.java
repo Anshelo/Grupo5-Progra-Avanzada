@@ -105,6 +105,28 @@ public class CarrierDAO {
         }
         return listaB;
     }
+    public Carrier searchCarrierbyId(String guideId) throws SQLException {
+        DBConnect connect = new DBConnect();
+        String query;
+        query = "SELECT * from transportista WHERE ci='" + guideId + "'";
+        PreparedStatement state = connect.connect().prepareStatement(query);
+        ResultSet rs = state.executeQuery();
+        Carrier carrier = null;
+        while (rs.next()) {
+        carrier=new Carrier();
+                carrier.setIdCarrier(rs.getInt(1));
+                carrier.setCi(rs.getString(2));
+                carrier.setBirthDate(rs.getString(3));
+                carrier.setName(rs.getString(4));
+                carrier.setAddress(rs.getString(5));
+                carrier.setPhone(rs.getString(6));
+                carrier.setMobile(rs.getString(7));
+                carrier.setEmail(rs.getString(8));
+                carrier.setTruckPlate(rs.getString(9));
+                carrier.setTruckType(rs.getString(10));    
+        }
+        return carrier;
+    }
     public ArrayList<Carrier> printCarrierById(int id) {
         ArrayList <Carrier> listaB=new ArrayList <Carrier>();
         Carrier carrier;
